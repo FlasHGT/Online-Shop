@@ -1,0 +1,57 @@
+CREATE TABLE Persona (
+	PersKods nchar (12) PRIMARY KEY,
+	Vards nvarchar (30) NOT NULL ,
+	Uzvards nvarchar (30) NOT NULL ,
+	Adrese nvarchar (100) NULL ,
+	Telefons nchar (20) NULL ,
+	DzimDat datetime2 NOT NULL
+)
+
+CREATE TABLE Amats (
+	ID int IDENTITY(1,1) PRIMARY KEY,
+	VeicejaPK nchar (12) FOREIGN KEY REFERENCES Persona,
+	AmataNos nvarchar (30) NOT NULL,
+	Apraksts nvarchar (100) NULL
+)
+
+INSERT INTO Persona (PersKods, Vards, Uzvards, Adrese, Telefons, DzimDat)
+	VALUES ('120572-13429', 'Jānis', 'Cimdiņš', NULL, '29845634', '19720512')
+
+INSERT INTO Persona (PersKods, Vards, Uzvards, Adrese, Telefons, DzimDat)
+	VALUES ('271184-10457', 'Anna', 'Kalnleja', 'Roja, Jūras iela 5', '29234539', '19841127')
+
+INSERT INTO Persona (PersKods, Vards, Uzvards, Adrese, Telefons, DzimDat)
+	VALUES ('110865-11642', 'Liene', 'Pētersila', 'Rīga, Brīvības 186', '26358377', '19650811')
+
+INSERT INTO Persona (PersKods, Vards, Uzvards, Adrese, Telefons, DzimDat)
+	VALUES ('230677-12973', 'Zanda', 'Orvela', NULL, NULL, '19770623')
+
+INSERT INTO Amats (VeicejaPK, AmataNos, Apraksts)
+	VALUES ('120572-13429', 'Grāmatvedis', NULL)
+
+INSERT INTO Amats (VeicejaPK, AmataNos, Apraksts)
+	VALUES ('271184-10457', 'Nodaļas vadītājs', NULL)
+
+INSERT INTO Amats (VeicejaPK, AmataNos, Apraksts)
+	VALUES ('230677-12973', 'Sekretārs-lietvedis', 'Kārto lietvedību, vāra kafiju')
+
+INSERT INTO Amats (VeicejaPK, AmataNos, Apraksts)
+	VALUES ('271184-10457', 'Atbildīgais par autotransportu', 'Pārrauga autotransporta noslogojumu un degvielas izlietojumu')
+
+UPDATE Amats
+	SET Apraksts='Veic firmas grāmatvedību'
+	WHERE AmataNos='Grāmatvedis'
+
+UPDATE Amats
+	SET VeicejaPK='110865-11642'
+	WHERE VeicejaPK='271184-10457'
+
+SELECT VeicejaPK, AmataNos
+FROM Amats
+WHERE Apraksts IS NOT NULL
+
+SELECT VeicejaPK, AmataNos FROM Amats
+
+DELETE FROM Amats
+
+DELETE FROM Persona
