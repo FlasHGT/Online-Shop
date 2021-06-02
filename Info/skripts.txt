@@ -1,0 +1,715 @@
+create table Klients (
+	id int identity(1,1) primary key,
+	epasts varchar(30) not null,
+	parole char(64) not null,
+	vards nvarchar(30) not null,
+	uzvards nvarchar(30) not null,
+	dzimsanas_diena date,
+	telefona_nr numeric(11,0)
+)
+
+create table KlientsKarte (
+	id int identity(1,1) primary key,
+	klients_id int foreign key references Klients not null,
+	numurs numeric(16,0) not null,
+	CVC numeric(3,0) not null,
+	termins_lidz date not null
+)
+
+create table Adrese (
+	id int identity(1,1) primary key,
+	klients_id int foreign key references Klients not null,
+	pilseta nvarchar(30) not null,
+	iela nvarchar(30) not null,
+	majas_nr int not null,
+	dzivokla_nr int,
+	pasta_indekss nvarchar(7) not null
+)
+
+create table Pasutijums (
+	id int identity(1,1) primary key,
+	klients_id int foreign key references Klients not null,
+	adrese_id int foreign key references Adrese not null,
+	karte_id int foreign key references KlientsKarte not null,
+	datums date not null,
+	cena smallmoney not null
+)
+
+create table Kategorija (
+	id int identity(1,1) primary key,
+	nosaukums nvarchar(30) not null,
+)
+
+create table Prece (
+	id int identity(1,1) primary key,
+	kategorija_id int foreign key references Kategorija not null,
+	nosaukums nvarchar(30) not null,
+	apraksts nvarchar(200) not null,
+	cena smallmoney not null,
+	atlaides_cena smallmoney
+)
+
+create table PasutijumsPrece (
+	prece_id int foreign key references Prece not null,
+	pasutijums_id int foreign key references Pasutijums not null,
+	skaits int not null
+)
+
+-- Klients
+-- parole: secret
+INSERT INTO users VALUES (NULL, 'janis@gmail.com','$2y$10$8AcmDBgpZgaR1OtoEmrgyeiiZYexKneZVET7y4mDab7ZkG5DLgoX.', 'Jānis', 'Ozols', NULL, 20565555, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'davis@gmail.com','$2y$10$8AcmDBgpZgaR1OtoEmrgyeiiZYexKneZVET7y4mDab7ZkG5DLgoX.', 'Dāvis', 'Ozols', NULL, 22565555, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'markuss@gmail.com','$2y$10$8AcmDBgpZgaR1OtoEmrgyeiiZYexKneZVET7y4mDab7ZkG5DLgoX.', 'Markuss', 'Ozols', NULL, 23565555, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'georgs@gmail.com','$2y$10$8AcmDBgpZgaR1OtoEmrgyeiiZYexKneZVET7y4mDab7ZkG5DLgoX.', 'Georgs', 'Ozols', NULL, 24565555, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'aija@gmail.com','$2y$10$8AcmDBgpZgaR1OtoEmrgyeiiZYexKneZVET7y4mDab7ZkG5DLgoX.', 'Aija', 'Ozola', NULL, 25565555, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'gunta@gmail.com','$2y$10$8AcmDBgpZgaR1OtoEmrgyeiiZYexKneZVET7y4mDab7ZkG5DLgoX.', 'Gunta', 'Ozola', NULL, 26565555, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'emils@gmail.com','$2y$10$8AcmDBgpZgaR1OtoEmrgyeiiZYexKneZVET7y4mDab7ZkG5DLgoX.', 'Emīls', 'Ozols', NULL, 27565555, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'roberts@gmail.com','$2y$10$8AcmDBgpZgaR1OtoEmrgyeiiZYexKneZVET7y4mDab7ZkG5DLgoX.', 'Roberts', 'Ozols', NULL, 28565555, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'kristaps@gmail.com','$2y$10$8AcmDBgpZgaR1OtoEmrgyeiiZYexKneZVET7y4mDab7ZkG5DLgoX.', 'Kristaps', 'Ozols', NULL, 29565555, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'ieva@gmail.com','$2y$10$8AcmDBgpZgaR1OtoEmrgyeiiZYexKneZVET7y4mDab7ZkG5DLgoX.', 'Ieva', 'Ozola', NULL, 29565555, NULL, NULL, NULL, NULL);
+
+-- parole: abols
+INSERT INTO users VALUES (NULL, 'janisjaunais@gmail.com','$2y$10$nVXA/WhCloTyjlkWnhvsY.Q78POs0NqqRlcoWFnoRizGFhEFZKhpC', 'Jānis', 'Jaunais', NULL, 20534625, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'davisjaunais@gmail.com','$2y$10$nVXA/WhCloTyjlkWnhvsY.Q78POs0NqqRlcoWFnoRizGFhEFZKhpC', 'Dāvis', 'Jaunais', NULL, 20000555, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'markussjaunais@gmail.com','$2y$10$nVXA/WhCloTyjlkWnhvsY.Q78POs0NqqRlcoWFnoRizGFhEFZKhpC', 'Markuss', 'Jaunais', NULL, 23515255, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'georgsjaunais@gmail.com','$2y$10$nVXA/WhCloTyjlkWnhvsY.Q78POs0NqqRlcoWFnoRizGFhEFZKhpC', 'Georgs', 'Jaunais', NULL, 20885555, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'aijajauna@gmail.com','$2y$10$nVXA/WhCloTyjlkWnhvsY.Q78POs0NqqRlcoWFnoRizGFhEFZKhpC', 'Aija', 'Jaunā', NULL, 25145155, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'guntajauna@gmail.com','$2y$10$nVXA/WhCloTyjlkWnhvsY.Q78POs0NqqRlcoWFnoRizGFhEFZKhpC', 'Gunta', 'Jaunā', NULL, 26766555, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'emilsjaunais@gmail.com','$2y$10$nVXA/WhCloTyjlkWnhvsY.Q78POs0NqqRlcoWFnoRizGFhEFZKhpC', 'Emīls', 'Jaunais', NULL, 27546465, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'robertsjaunais@gmail.com','$2y$10$nVXA/WhCloTyjlkWnhvsY.Q78POs0NqqRlcoWFnoRizGFhEFZKhpC', 'Roberts', 'Jaunais', NULL, 21335555, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'kristapsjaunais@gmail.com','$2y$10$nVXA/WhCloTyjlkWnhvsY.Q78POs0NqqRlcoWFnoRizGFhEFZKhpC', 'Kristaps', 'Jaunais', NULL, 29569955, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'ievajauna@gmail.com','$2y$10$nVXA/WhCloTyjlkWnhvsY.Q78POs0NqqRlcoWFnoRizGFhEFZKhpC', 'Ieva', 'Jaunā', NULL, 25235555, NULL, NULL, NULL, NULL);
+
+-- parole: bumbieris
+INSERT INTO users VALUES (NULL, 'guntismelngalvis@gmail.com','$2y$10$hQnOYW66RcoxdfVCsZj/oeddtkP6H2KUzMKMPvEjqMeB9amwAOo3m', 'Guntis', 'Melngalvis', '20000213', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'alekmelngalvis@gmail.com','$2y$10$hQnOYW66RcoxdfVCsZj/oeddtkP6H2KUzMKMPvEjqMeB9amwAOo3m', 'Aleksandrs', 'Melngalvis', '20010213', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'edgamelngalvis@gmail.com','$2y$10$hQnOYW66RcoxdfVCsZj/oeddtkP6H2KUzMKMPvEjqMeB9amwAOo3m', 'Edgars', 'Melngalvis', '20030213', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'marmelngalvis@gmail.com','$2y$10$hQnOYW66RcoxdfVCsZj/oeddtkP6H2KUzMKMPvEjqMeB9amwAOo3m', 'Māris', 'Melngalvis', '20040213', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'dmelngalve@gmail.com','$2y$10$hQnOYW66RcoxdfVCsZj/oeddtkP6H2KUzMKMPvEjqMeB9amwAOo3m', 'Dace', 'Melngalve', '20050213', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'madaramelngalve@gmail.com','$2y$10$hQnOYW66RcoxdfVCsZj/oeddtkP6H2KUzMKMPvEjqMeB9amwAOo3m', 'Madara', 'Melngalve', '20060213', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'tmelngalvis@gmail.com','$2y$10$hQnOYW66RcoxdfVCsZj/oeddtkP6H2KUzMKMPvEjqMeB9amwAOo3m', 'Toms', 'Melngalvis', '20070213', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'imelngalvis@gmail.com','$2y$10$hQnOYW66RcoxdfVCsZj/oeddtkP6H2KUzMKMPvEjqMeB9amwAOo3m', 'Izaks', 'Melngalvis', '20080213', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'rmelngalvis@gmail.com','$2y$10$hQnOYW66RcoxdfVCsZj/oeddtkP6H2KUzMKMPvEjqMeB9amwAOo3m', 'Rūdolfs', 'Melngalvis', '20090213', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'dartamelngalve@gmail.com','$2y$10$hQnOYW66RcoxdfVCsZj/oeddtkP6H2KUzMKMPvEjqMeB9amwAOo3m', 'Dārta', 'Melngalve', '19990213', NULL, NULL, NULL, NULL, NULL);
+
+-- parole: lacis
+INSERT INTO users VALUES (NULL, 'jmelngalvis@gmail.com','$2y$10$4QfWNEhVed3fsWPZDOKeZO5ssc8lJbvLg.HYW53QsPAUIgJIwwY4u', 'Jānis', 'Melngalvis', '19640226', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'dmelngalvis@gmail.com','$2y$10$4QfWNEhVed3fsWPZDOKeZO5ssc8lJbvLg.HYW53QsPAUIgJIwwY4u', 'Dāvis', 'Melngalvis', '20010513', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'mmelngalvis@gmail.com','$2y$10$4QfWNEhVed3fsWPZDOKeZO5ssc8lJbvLg.HYW53QsPAUIgJIwwY4u', 'Markuss', 'Melngalvis', '20030913', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'gmelngalvis@gmail.com','$2y$10$4QfWNEhVed3fsWPZDOKeZO5ssc8lJbvLg.HYW53QsPAUIgJIwwY4u', 'Georgs', 'Melngalvis', '20040217', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'amelngalve@gmail.com','$2y$10$4QfWNEhVed3fsWPZDOKeZO5ssc8lJbvLg.HYW53QsPAUIgJIwwY4u', 'Aija', 'Melngalve', '19970131', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'guntamelngalve@gmail.com','$2y$10$4QfWNEhVed3fsWPZDOKeZO5ssc8lJbvLg.HYW53QsPAUIgJIwwY4u', 'Gunta', 'Melngalve', '19930422', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'emelngalvis@gmail.com','$2y$10$4QfWNEhVed3fsWPZDOKeZO5ssc8lJbvLg.HYW53QsPAUIgJIwwY4u', 'Emīls', 'Melngalvis', '20071113', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'robmelngalvis@gmail.com','$2y$10$4QfWNEhVed3fsWPZDOKeZO5ssc8lJbvLg.HYW53QsPAUIgJIwwY4u', 'Roberts', 'Melngalvis', '20080112', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'kmelngalvis@gmail.com','$2y$10$4QfWNEhVed3fsWPZDOKeZO5ssc8lJbvLg.HYW53QsPAUIgJIwwY4u', 'Kristaps', 'Melngalvis', '20210213', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'imelngalve@gmail.com','$2y$10$4QfWNEhVed3fsWPZDOKeZO5ssc8lJbvLg.HYW53QsPAUIgJIwwY4u', 'Ieva', 'Melngalve', '19990213', NULL, NULL, NULL, NULL, NULL);
+
+-- parole: dators
+INSERT INTO users VALUES (NULL, 'jbumbieris@gmail.com','$2y$10$59.zsqRdHZ/eiISzbgM0XOQkZ9msnuKqKC//CNaRvRSjRbkxKFI4q', 'Jānis', 'Bumbieris', '20001213', 21435567, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'dbumbieris@gmail.com','$2y$10$59.zsqRdHZ/eiISzbgM0XOQkZ9msnuKqKC//CNaRvRSjRbkxKFI4q', 'Dāvis', 'Bumbieris', '20011113', 26265567, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'mbumbieris@gmail.com','$2y$10$59.zsqRdHZ/eiISzbgM0XOQkZ9msnuKqKC//CNaRvRSjRbkxKFI4q', 'Markuss', 'Bumbieris', '20030413', 21354567, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'gbumbieris@gmail.com','$2y$10$59.zsqRdHZ/eiISzbgM0XOQkZ9msnuKqKC//CNaRvRSjRbkxKFI4q', 'Georgs', 'Bumbieris', '20040513', 23745467, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'abumbiere@gmail.com','$2y$10$59.zsqRdHZ/eiISzbgM0XOQkZ9msnuKqKC//CNaRvRSjRbkxKFI4q', 'Aija', 'Bumbiere', '20050613', 21437867, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'guntabumbiere@gmail.com','$2y$10$59.zsqRdHZ/eiISzbgM0XOQkZ9msnuKqKC//CNaRvRSjRbkxKFI4q', 'Gunta', 'Bumbiere', '20060813', 23235567, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'ebumbieris@gmail.com','$2y$10$59.zsqRdHZ/eiISzbgM0XOQkZ9msnuKqKC//CNaRvRSjRbkxKFI4q', 'Emīls', 'Bumbieris', '20070113', 25325567, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'robbumbieris@gmail.com','$2y$10$59.zsqRdHZ/eiISzbgM0XOQkZ9msnuKqKC//CNaRvRSjRbkxKFI4q', 'Roberts', 'Bumbieris', '20080213', 21115567, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'kbumbieris@gmail.com','$2y$10$59.zsqRdHZ/eiISzbgM0XOQkZ9msnuKqKC//CNaRvRSjRbkxKFI4q', 'Kristaps', 'Bumbieris', '20090313', 25256267, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'ibumbiere@gmail.com','$2y$10$59.zsqRdHZ/eiISzbgM0XOQkZ9msnuKqKC//CNaRvRSjRbkxKFI4q', 'Ieva', 'Bumbiere', '19990913', 29435567, NULL, NULL, NULL, NULL);
+
+-- parole: telefons
+INSERT INTO users VALUES (NULL, 'guntiskrasainais@gmail.com','$2y$10$rqu8DhWDTR2fHYU1ZEbuK./cww2zXyhDRUab53MuECqQfraZzcbyq', 'Guntis', 'Krāsainais', '20000213', 20534625, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'alekkrasainais@gmail.com','$2y$10$rqu8DhWDTR2fHYU1ZEbuK./cww2zXyhDRUab53MuECqQfraZzcbyq', 'Aleksandrs', 'Krāsainais', '20010213', 20000555, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'edgakrasainais@gmail.com','$2y$10$rqu8DhWDTR2fHYU1ZEbuK./cww2zXyhDRUab53MuECqQfraZzcbyq', 'Edgars', 'Krāsainais', '20030213', 23515255, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'markrasainais@gmail.com','$2y$10$rqu8DhWDTR2fHYU1ZEbuK./cww2zXyhDRUab53MuECqQfraZzcbyq', 'Māris', 'Krāsainais', '20040213', 20885555, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'dkrasaina@gmail.com','$2y$10$rqu8DhWDTR2fHYU1ZEbuK./cww2zXyhDRUab53MuECqQfraZzcbyq', 'Dace', 'Krāsainā', '20050213', 25145155, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'madarakrasaina@gmail.com','$2y$10$rqu8DhWDTR2fHYU1ZEbuK./cww2zXyhDRUab53MuECqQfraZzcbyq', 'Madara', 'Krāsainā', '20060213', 26766555, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'tkrasainais@gmail.com','$2y$10$rqu8DhWDTR2fHYU1ZEbuK./cww2zXyhDRUab53MuECqQfraZzcbyq', 'Toms', 'Krāsainais', '20070213', 27546465, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'ikrasainais@gmail.com','$2y$10$rqu8DhWDTR2fHYU1ZEbuK./cww2zXyhDRUab53MuECqQfraZzcbyq', 'Izaks', 'Krāsainais', '20080213', 21335555, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'rkrasainais@gmail.com','$2y$10$rqu8DhWDTR2fHYU1ZEbuK./cww2zXyhDRUab53MuECqQfraZzcbyq', 'Rūdolfs', 'Krāsainais', '20090213', 29569955, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'dartakrasaina@gmail.com','$2y$10$rqu8DhWDTR2fHYU1ZEbuK./cww2zXyhDRUab53MuECqQfraZzcbyq', 'Dārta', 'Krāsainā', '19990213', 25235555, NULL, NULL, NULL, NULL);
+
+-- parole: melnais
+INSERT INTO users VALUES (NULL, 'jmelnais@gmail.com','$2y$10$U4cgC5ad2tSx90YlJx/RqOuzIranIMbVI.T864A/M9QFaz/0v41/W', 'Jānis', 'Melnais', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'dmelnais@gmail.com','$2y$10$U4cgC5ad2tSx90YlJx/RqOuzIranIMbVI.T864A/M9QFaz/0v41/W', 'Dāvis', 'Melnais', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'mmelnais@gmail.com','$2y$10$U4cgC5ad2tSx90YlJx/RqOuzIranIMbVI.T864A/M9QFaz/0v41/W', 'Markuss', 'Melnais', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'gmelnais@gmail.com','$2y$10$U4cgC5ad2tSx90YlJx/RqOuzIranIMbVI.T864A/M9QFaz/0v41/W', 'Georgs', 'Melnais', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'amelna@gmail.com','$2y$10$U4cgC5ad2tSx90YlJx/RqOuzIranIMbVI.T864A/M9QFaz/0v41/W', 'Aija', 'Melnā', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'guntamelna@gmail.com','$2y$10$U4cgC5ad2tSx90YlJx/RqOuzIranIMbVI.T864A/M9QFaz/0v41/W', 'Gunta', 'Melnā', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'emelnais@gmail.com','$2y$10$U4cgC5ad2tSx90YlJx/RqOuzIranIMbVI.T864A/M9QFaz/0v41/W', 'Emīls', 'Melnais', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'rmelnais@gmail.com','$2y$10$U4cgC5ad2tSx90YlJx/RqOuzIranIMbVI.T864A/M9QFaz/0v41/W', 'Roberts', 'Melnais', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'kmelnais@gmail.com','$2y$10$U4cgC5ad2tSx90YlJx/RqOuzIranIMbVI.T864A/M9QFaz/0v41/W', 'Kristaps', 'Melnais', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'imelna@gmail.com','$2y$10$U4cgC5ad2tSx90YlJx/RqOuzIranIMbVI.T864A/M9QFaz/0v41/W', 'Ieva', 'Melnā', NULL, NULL, NULL, NULL, NULL, NULL);
+
+-- parole: saule
+INSERT INTO users VALUES (NULL, 'jsaule@gmail.com','$2y$10$lvAn1xUvyrCH1GqZgRg9w.hRBcldLeluMRfOc/GmU.jb8zR5w0lSC', 'Jānis', 'Saule', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'dsaule@gmail.com','$2y$10$lvAn1xUvyrCH1GqZgRg9w.hRBcldLeluMRfOc/GmU.jb8zR5w0lSC', 'Dāvis', 'Saule', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'msaule@gmail.com','$2y$10$lvAn1xUvyrCH1GqZgRg9w.hRBcldLeluMRfOc/GmU.jb8zR5w0lSC', 'Markuss', 'Saule', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'gsaule@gmail.com','$2y$10$lvAn1xUvyrCH1GqZgRg9w.hRBcldLeluMRfOc/GmU.jb8zR5w0lSC', 'Georgs', 'Saule', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'asaule@gmail.com','$2y$10$lvAn1xUvyrCH1GqZgRg9w.hRBcldLeluMRfOc/GmU.jb8zR5w0lSC', 'Aija', 'Saule', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'guntasaule@gmail.com','$2y$10$lvAn1xUvyrCH1GqZgRg9w.hRBcldLeluMRfOc/GmU.jb8zR5w0lSC', 'Gunta', 'Saule', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'esaule@gmail.com','$2y$10$lvAn1xUvyrCH1GqZgRg9w.hRBcldLeluMRfOc/GmU.jb8zR5w0lSC', 'Emīls', 'Saule', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'rsaule@gmail.com','$2y$10$lvAn1xUvyrCH1GqZgRg9w.hRBcldLeluMRfOc/GmU.jb8zR5w0lSC', 'Roberts', 'Saule', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'ksaule@gmail.com','$2y$10$lvAn1xUvyrCH1GqZgRg9w.hRBcldLeluMRfOc/GmU.jb8zR5w0lSC', 'Kristaps', 'Saule', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'isaule@gmail.com','$2y$10$lvAn1xUvyrCH1GqZgRg9w.hRBcldLeluMRfOc/GmU.jb8zR5w0lSC', 'Ieva', 'Saule', NULL, NULL, NULL, NULL, NULL, NULL);
+
+-- parole: markuss
+INSERT INTO users VALUES (NULL, 'jmarkuss@gmail.com','$2y$10$BakhhX4KUJ5ClIMsT3TMz.m/MN9IsC1lCcBTBXLelzwYTeT2cvueC', 'Jānis', 'Markuss', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'dmarkuss@gmail.com','$2y$10$BakhhX4KUJ5ClIMsT3TMz.m/MN9IsC1lCcBTBXLelzwYTeT2cvueC', 'Dāvis', 'Markuss', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'mmarkuss@gmail.com','$2y$10$BakhhX4KUJ5ClIMsT3TMz.m/MN9IsC1lCcBTBXLelzwYTeT2cvueC', 'Markuss', 'Markuss', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'gmarkuss@gmail.com','$2y$10$BakhhX4KUJ5ClIMsT3TMz.m/MN9IsC1lCcBTBXLelzwYTeT2cvueC', 'Georgs', 'Markuss', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'amarkuss@gmail.com','$2y$10$BakhhX4KUJ5ClIMsT3TMz.m/MN9IsC1lCcBTBXLelzwYTeT2cvueC', 'Aija', 'Markuss', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'guntamarkuss@gmail.com','$2y$10$BakhhX4KUJ5ClIMsT3TMz.m/MN9IsC1lCcBTBXLelzwYTeT2cvueC', 'Gunta', 'Markuss', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'emarkuss@gmail.com','$2y$10$BakhhX4KUJ5ClIMsT3TMz.m/MN9IsC1lCcBTBXLelzwYTeT2cvueC', 'Emīls', 'Markuss', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'rmarkuss@gmail.com','$2y$10$BakhhX4KUJ5ClIMsT3TMz.m/MN9IsC1lCcBTBXLelzwYTeT2cvueC', 'Roberts', 'Markuss', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'kmarkuss@gmail.com','$2y$10$BakhhX4KUJ5ClIMsT3TMz.m/MN9IsC1lCcBTBXLelzwYTeT2cvueC', 'Kristaps', 'Markuss', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'imarkuss@gmail.com','$2y$10$BakhhX4KUJ5ClIMsT3TMz.m/MN9IsC1lCcBTBXLelzwYTeT2cvueC', 'Ieva', 'Markuss', NULL, NULL, NULL, NULL, NULL, NULL);
+
+-- parole: guntis
+INSERT INTO users VALUES (NULL, 'guntisbumbieris@gmail.com','$2y$10$Nx23gdCRVnPAwzvQeXFJbOyb1lXkXxytLtu8qY7nfs.muVliWZkfi', 'Guntis', 'Bumbieris', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'alekbumbieris@gmail.com','$2y$10$Nx23gdCRVnPAwzvQeXFJbOyb1lXkXxytLtu8qY7nfs.muVliWZkfi', 'Aleksandrs', 'Bumbieris', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'edgabumbieris@gmail.com','$2y$10$Nx23gdCRVnPAwzvQeXFJbOyb1lXkXxytLtu8qY7nfs.muVliWZkfi', 'Edgars', 'Bumbieris', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'marbumbieris@gmail.com','$2y$10$Nx23gdCRVnPAwzvQeXFJbOyb1lXkXxytLtu8qY7nfs.muVliWZkfi', 'Māris', 'Bumbieris', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'dbumbiere@gmail.com','$2y$10$Nx23gdCRVnPAwzvQeXFJbOyb1lXkXxytLtu8qY7nfs.muVliWZkfi', 'Dace', 'Bumbiere', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'madarabumbiere@gmail.com','$2y$10$Nx23gdCRVnPAwzvQeXFJbOyb1lXkXxytLtu8qY7nfs.muVliWZkfi', 'Madara', 'Bumbiere', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'tbumbieris@gmail.com','$2y$10$Nx23gdCRVnPAwzvQeXFJbOyb1lXkXxytLtu8qY7nfs.muVliWZkfi', 'Toms', 'Bumbieris', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'ibumbieris@gmail.com','$2y$10$Nx23gdCRVnPAwzvQeXFJbOyb1lXkXxytLtu8qY7nfs.muVliWZkfi', 'Izaks', 'Bumbieris', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'rbumbieris@gmail.com','$2y$10$Nx23gdCRVnPAwzvQeXFJbOyb1lXkXxytLtu8qY7nfs.muVliWZkfi', 'Rūdolfs', 'Bumbieris', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO users VALUES (NULL, 'dartabumbiere@gmail.com','$2y$10$Nx23gdCRVnPAwzvQeXFJbOyb1lXkXxytLtu8qY7nfs.muVliWZkfi', 'Dārta', 'Bumbiere', NULL, NULL, NULL, NULL, NULL, NULL);
+
+-- Adrese
+INSERT INTO Adrese VALUES (100, 'Rīga', 'Krišjāņa', 12, 31, 'LV-1092')
+INSERT INTO Adrese VALUES (99, 'Rīga', 'Krišjāņa', 12, 112, 'LV-1092')
+INSERT INTO Adrese VALUES (98, 'Rīga', 'Krišjāņa', 12, 1, 'LV-1092')
+INSERT INTO Adrese VALUES (97, 'Rīga', 'Krišjāņa', 12, 3, 'LV-1092')
+INSERT INTO Adrese VALUES (96, 'Rīga', 'Krišjāņa', 12, 44, 'LV-1092')
+INSERT INTO Adrese VALUES (95, 'Rīga', 'Krišjāņa', 12, 26, 'LV-1092')
+INSERT INTO Adrese VALUES (94, 'Rīga', 'Krišjāņa', 12, 89, 'LV-1092')
+INSERT INTO Adrese VALUES (93, 'Rīga', 'Krišjāņa', 12, 14, 'LV-1092')
+INSERT INTO Adrese VALUES (92, 'Rīga', 'Krišjāņa', 12, 44, 'LV-1092')
+INSERT INTO Adrese VALUES (91, 'Rīga', 'Krišjāņa', 12, 59, 'LV-1092')
+
+INSERT INTO Adrese VALUES (90, 'Jelgava', 'Krišjāņa', 12, 31, 'LV-1067')
+INSERT INTO Adrese VALUES (89, 'Jelgava', 'Krišjāņa', 12, 112, 'LV-1067')
+INSERT INTO Adrese VALUES (88, 'Jelgava', 'Krišjāņa', 12, 1, 'LV-1067')
+INSERT INTO Adrese VALUES (87, 'Jelgava', 'Krišjāņa', 12, 3, 'LV-1067')
+INSERT INTO Adrese VALUES (86, 'Jelgava', 'Krišjāņa', 12, 44, 'LV-1067')
+INSERT INTO Adrese VALUES (85, 'Jelgava', 'Krišjāņa', 12, 26, 'LV-1067')
+INSERT INTO Adrese VALUES (84, 'Jelgava', 'Krišjāņa', 12, 89, 'LV-1067')
+INSERT INTO Adrese VALUES (83, 'Jelgava', 'Krišjāņa', 12, 14, 'LV-1067')
+INSERT INTO Adrese VALUES (82, 'Jelgava', 'Krišjāņa', 12, 44, 'LV-1067')
+INSERT INTO Adrese VALUES (81, 'Jelgava', 'Krišjāņa', 12, 59, 'LV-1067')
+
+INSERT INTO Adrese VALUES (80, 'Liepāja', 'Krišjāņa', 12, 31, 'LV-1043')
+INSERT INTO Adrese VALUES (79, 'Liepāja', 'Krišjāņa', 12, 112, 'LV-1043')
+INSERT INTO Adrese VALUES (78, 'Liepāja', 'Krišjāņa', 12, 1, 'LV-1043')
+INSERT INTO Adrese VALUES (77, 'Liepāja', 'Krišjāņa', 12, 3, 'LV-1043')
+INSERT INTO Adrese VALUES (76, 'Liepāja', 'Krišjāņa', 12, 44, 'LV-1043')
+INSERT INTO Adrese VALUES (75, 'Liepāja', 'Krišjāņa', 12, 26, 'LV-1043')
+INSERT INTO Adrese VALUES (74, 'Liepāja', 'Krišjāņa', 12, 89, 'LV-1043')
+INSERT INTO Adrese VALUES (73, 'Liepāja', 'Krišjāņa', 12, 14, 'LV-1043')
+INSERT INTO Adrese VALUES (72, 'Liepāja', 'Krišjāņa', 12, 44, 'LV-1043')
+INSERT INTO Adrese VALUES (71, 'Liepāja', 'Krišjāņa', 12, 59, 'LV-1043')
+
+INSERT INTO Adrese VALUES (70, 'Ventspils', 'Krišjāņa', 12, 31, 'LV-1012')
+INSERT INTO Adrese VALUES (69, 'Ventspils', 'Krišjāņa', 12, 112, 'LV-1012')
+INSERT INTO Adrese VALUES (68, 'Ventspils', 'Krišjāņa', 12, 1, 'LV-1012')
+INSERT INTO Adrese VALUES (67, 'Ventspils', 'Krišjāņa', 12, 3, 'LV-1012')
+INSERT INTO Adrese VALUES (66, 'Ventspils', 'Krišjāņa', 12, 44, 'LV-1012')
+INSERT INTO Adrese VALUES (65, 'Ventspils', 'Krišjāņa', 12, 26, 'LV-1012')
+INSERT INTO Adrese VALUES (64, 'Ventspils', 'Krišjāņa', 12, 89, 'LV-1012')
+INSERT INTO Adrese VALUES (63, 'Ventspils', 'Krišjāņa', 12, 14, 'LV-1012')
+INSERT INTO Adrese VALUES (62, 'Ventspils', 'Krišjāņa', 12, 44, 'LV-1012')
+INSERT INTO Adrese VALUES (61, 'Ventspils', 'Krišjāņa', 12, 59, 'LV-1012')
+
+INSERT INTO Adrese VALUES (60, 'Daugavpils', 'Krišjāņa', 12, 31, 'LV-1021')
+INSERT INTO Adrese VALUES (59, 'Daugavpils', 'Krišjāņa', 12, 112, 'LV-1021')
+INSERT INTO Adrese VALUES (58, 'Daugavpils', 'Krišjāņa', 12, 1, 'LV-1021')
+INSERT INTO Adrese VALUES (57, 'Daugavpils', 'Krišjāņa', 12, 3, 'LV-1021')
+INSERT INTO Adrese VALUES (56, 'Daugavpils', 'Krišjāņa', 12, 44, 'LV-1021')
+INSERT INTO Adrese VALUES (55, 'Daugavpils', 'Krišjāņa', 12, 26, 'LV-1021')
+INSERT INTO Adrese VALUES (54, 'Daugavpils', 'Krišjāņa', 12, 89, 'LV-1021')
+INSERT INTO Adrese VALUES (53, 'Daugavpils', 'Krišjāņa', 12, 14, 'LV-1021')
+INSERT INTO Adrese VALUES (52, 'Daugavpils', 'Krišjāņa', 12, 44, 'LV-1021')
+INSERT INTO Adrese VALUES (51, 'Daugavpils', 'Krišjāņa', 12, 59, 'LV-1021')
+
+INSERT INTO Adrese VALUES (50, 'Valmiera', 'Krišjāņa', 12, 31, 'LV-1054')
+INSERT INTO Adrese VALUES (49, 'Valmiera', 'Krišjāņa', 12, 112, 'LV-1054')
+INSERT INTO Adrese VALUES (48, 'Valmiera', 'Krišjāņa', 12, 1, 'LV-1054')
+INSERT INTO Adrese VALUES (47, 'Valmiera', 'Krišjāņa', 12, 3, 'LV-1054')
+INSERT INTO Adrese VALUES (46, 'Valmiera', 'Krišjāņa', 12, 44, 'LV-1054')
+INSERT INTO Adrese VALUES (45, 'Valmiera', 'Krišjāņa', 12, 26, 'LV-1054')
+INSERT INTO Adrese VALUES (44, 'Valmiera', 'Krišjāņa', 12, 89, 'LV-1054')
+INSERT INTO Adrese VALUES (43, 'Valmiera', 'Krišjāņa', 12, 14, 'LV-1054')
+INSERT INTO Adrese VALUES (42, 'Valmiera', 'Krišjāņa', 12, 44, 'LV-1054')
+INSERT INTO Adrese VALUES (41, 'Valmiera', 'Krišjāņa', 12, 59, 'LV-1054')
+
+INSERT INTO Adrese VALUES (40, 'Jūrmala', 'Krišjāņa', 12, 31, 'LV-1089')
+INSERT INTO Adrese VALUES (39, 'Jūrmala', 'Krišjāņa', 12, 112, 'LV-1089')
+INSERT INTO Adrese VALUES (38, 'Jūrmala', 'Krišjāņa', 12, 1, 'LV-1089')
+INSERT INTO Adrese VALUES (37, 'Jūrmala', 'Krišjāņa', 12, 3, 'LV-1089')
+INSERT INTO Adrese VALUES (36, 'Jūrmala', 'Krišjāņa', 12, 44, 'LV-1089')
+INSERT INTO Adrese VALUES (35, 'Jūrmala', 'Krišjāņa', 12, 26, 'LV-1089')
+INSERT INTO Adrese VALUES (34, 'Jūrmala', 'Krišjāņa', 12, 89, 'LV-1089')
+INSERT INTO Adrese VALUES (33, 'Jūrmala', 'Krišjāņa', 12, 14, 'LV-1089')
+INSERT INTO Adrese VALUES (32, 'Jūrmala', 'Krišjāņa', 12, 44, 'LV-1089')
+INSERT INTO Adrese VALUES (31, 'Jūrmala', 'Krišjāņa', 12, 59, 'LV-1089')
+
+INSERT INTO Adrese VALUES (30, 'Cēsis', 'Rīgas', 12, NULL, 'LV-1077')
+INSERT INTO Adrese VALUES (29, 'Cēsis', 'Rīgas', 14, NULL, 'LV-1077')
+INSERT INTO Adrese VALUES (28, 'Cēsis', 'Rīgas', 67, NULL, 'LV-1077')
+INSERT INTO Adrese VALUES (27, 'Cēsis', 'Rīgas', 43, NULL, 'LV-1077')
+INSERT INTO Adrese VALUES (26, 'Cēsis', 'Rīgas', 22, NULL, 'LV-1077')
+INSERT INTO Adrese VALUES (25, 'Cēsis', 'Rīgas', 89, NULL, 'LV-1077')
+INSERT INTO Adrese VALUES (24, 'Cēsis', 'Rīgas', 96, NULL, 'LV-1077')
+INSERT INTO Adrese VALUES (23, 'Cēsis', 'Rīgas', 45, NULL, 'LV-1077')
+INSERT INTO Adrese VALUES (22, 'Cēsis', 'Rīgas', 57, NULL, 'LV-1077')
+INSERT INTO Adrese VALUES (21, 'Cēsis', 'Rīgas', 5, NULL, 'LV-1077')
+
+INSERT INTO Adrese VALUES (100, 'Mārupe', 'Rīgas', 12, NULL, 'LV-1099')
+INSERT INTO Adrese VALUES (99, 'Mārupe', 'Rīgas', 14, NULL, 'LV-1099')
+INSERT INTO Adrese VALUES (98, 'Mārupe', 'Rīgas', 67, NULL, 'LV-1099')
+INSERT INTO Adrese VALUES (97, 'Mārupe', 'Rīgas', 43, NULL, 'LV-1099')
+INSERT INTO Adrese VALUES (96, 'Mārupe', 'Rīgas', 22, NULL, 'LV-1099')
+INSERT INTO Adrese VALUES (95, 'Mārupe', 'Rīgas', 89, NULL, 'LV-1099')
+INSERT INTO Adrese VALUES (94, 'Mārupe', 'Rīgas', 96, NULL, 'LV-1099')
+INSERT INTO Adrese VALUES (93, 'Mārupe', 'Rīgas', 45, NULL, 'LV-1099')
+INSERT INTO Adrese VALUES (92, 'Mārupe', 'Rīgas', 57, NULL, 'LV-1099')
+INSERT INTO Adrese VALUES (91, 'Mārupe', 'Rīgas', 5, NULL, 'LV-1099')
+
+INSERT INTO Adrese VALUES (100, 'Mārupe', 'Rīgas', 12, NULL, 'LV-1098')
+INSERT INTO Adrese VALUES (99, 'Mārupe', 'Rīgas', 14, NULL, 'LV-1098')
+INSERT INTO Adrese VALUES (98, 'Mārupe', 'Rīgas', 67, NULL, 'LV-1098')
+INSERT INTO Adrese VALUES (97, 'Mārupe', 'Rīgas', 43, NULL, 'LV-1098')
+INSERT INTO Adrese VALUES (96, 'Mārupe', 'Rīgas', 22, NULL, 'LV-1098')
+INSERT INTO Adrese VALUES (95, 'Mārupe', 'Rīgas', 89, NULL, 'LV-1098')
+INSERT INTO Adrese VALUES (94, 'Mārupe', 'Rīgas', 96, NULL, 'LV-1098')
+INSERT INTO Adrese VALUES (93, 'Mārupe', 'Rīgas', 45, NULL, 'LV-1098')
+INSERT INTO Adrese VALUES (92, 'Mārupe', 'Rīgas', 57, NULL, 'LV-1098')
+INSERT INTO Adrese VALUES (91, 'Mārupe', 'Rīgas', 5, NULL, 'LV-1098')
+
+-- Klients Karte
+INSERT INTO KlientsKarte VALUES (1, 1111995215526666, 431, '20220131')
+INSERT INTO KlientsKarte VALUES (2, 2222995215526666, 431, '20230131')
+INSERT INTO KlientsKarte VALUES (3, 3333995215526666, 431, '20240131')
+INSERT INTO KlientsKarte VALUES (4, 4444995215526666, 431, '20220323')
+INSERT INTO KlientsKarte VALUES (5, 5555995215526666, 431, '20220405')
+INSERT INTO KlientsKarte VALUES (6, 6666995215526666, 431, '20230714')
+INSERT INTO KlientsKarte VALUES (7, 7777995215526666, 431, '20230902')
+INSERT INTO KlientsKarte VALUES (8, 8888995215526666, 431, '20240312')
+INSERT INTO KlientsKarte VALUES (9, 9999995215526666, 431, '20240725')
+INSERT INTO KlientsKarte VALUES (10, 1212995215526666, 431, '20250512')
+
+INSERT INTO KlientsKarte VALUES (11, 1124511215526666, 132, '20220115')
+INSERT INTO KlientsKarte VALUES (12, 2222995267347666, 132, '20230102')
+INSERT INTO KlientsKarte VALUES (13, 3323135215526666, 132, '20240122')
+INSERT INTO KlientsKarte VALUES (14, 4222995215526666, 132, '20220301')
+INSERT INTO KlientsKarte VALUES (15, 5512415215526666, 132, '20220429')
+INSERT INTO KlientsKarte VALUES (16, 6653995215526666, 132, '20230714')
+INSERT INTO KlientsKarte VALUES (17, 2377995215526666, 132, '20230902')
+INSERT INTO KlientsKarte VALUES (18, 8812312315526666, 132, '20240312')
+INSERT INTO KlientsKarte VALUES (19, 9998686215526666, 132, '20240725')
+INSERT INTO KlientsKarte VALUES (20, 1212995215534446, 132, '20250512')
+
+INSERT INTO KlientsKarte VALUES (21, 1127438315526666, 549, '20280115')
+INSERT INTO KlientsKarte VALUES (22, 2245355267347666, 549, '20260102')
+INSERT INTO KlientsKarte VALUES (23, 3323135525326666, 549, '20240122')
+INSERT INTO KlientsKarte VALUES (24, 4222342424226666, 549, '20270301')
+INSERT INTO KlientsKarte VALUES (25, 5512335215526666, 549, '20220429')
+INSERT INTO KlientsKarte VALUES (26, 6123995215526666, 549, '20230914')
+INSERT INTO KlientsKarte VALUES (27, 2314156715526666, 549, '20231102')
+INSERT INTO KlientsKarte VALUES (28, 8856464315526666, 549, '20230312')
+INSERT INTO KlientsKarte VALUES (29, 9931386215526666, 549, '20290725')
+INSERT INTO KlientsKarte VALUES (30, 1212525215534446, 549, '20250528')
+
+INSERT INTO KlientsKarte VALUES (31, 2341418315526666, 898, '20280115')
+INSERT INTO KlientsKarte VALUES (32, 2245324467347666, 898, '20260102')
+INSERT INTO KlientsKarte VALUES (33, 3323135522316666, 898, '20240122')
+INSERT INTO KlientsKarte VALUES (34, 4215152524226666, 898, '20270301')
+INSERT INTO KlientsKarte VALUES (35, 5634645215526666, 898, '20220429')
+INSERT INTO KlientsKarte VALUES (36, 6123934665526666, 898, '20230914')
+INSERT INTO KlientsKarte VALUES (37, 2319464315526666, 898, '20231102')
+INSERT INTO KlientsKarte VALUES (38, 8826869324526666, 898, '20230312')
+INSERT INTO KlientsKarte VALUES (39, 9931389086326666, 898, '20290725')
+INSERT INTO KlientsKarte VALUES (40, 1206067765534446, 898, '20250528')
+
+INSERT INTO KlientsKarte VALUES (41, 1981418315526666, 666, '20280115')
+INSERT INTO KlientsKarte VALUES (42, 2245324467347666, 666, '20260102')
+INSERT INTO KlientsKarte VALUES (43, 3323135522316666, 666, '20240122')
+INSERT INTO KlientsKarte VALUES (44, 8885152524226666, 666, '20270301')
+INSERT INTO KlientsKarte VALUES (45, 6544645215526666, 666, '20220429')
+INSERT INTO KlientsKarte VALUES (46, 1423934665526666, 666, '20230914')
+INSERT INTO KlientsKarte VALUES (47, 5259464315526666, 666, '20231102')
+INSERT INTO KlientsKarte VALUES (48, 9066869324526666, 666, '20230312')
+INSERT INTO KlientsKarte VALUES (49, 5001389086326666, 666, '20290725')
+INSERT INTO KlientsKarte VALUES (50, 5647767765534446, 666, '20250528')
+
+INSERT INTO KlientsKarte VALUES (1, 2119952155266684, 999, '20220131')
+INSERT INTO KlientsKarte VALUES (2, 3222995215526667, 999, '20230131')
+INSERT INTO KlientsKarte VALUES (3, 4333995215526667, 999, '20240131')
+INSERT INTO KlientsKarte VALUES (4, 5444995215526667, 999, '20220323')
+INSERT INTO KlientsKarte VALUES (5, 6555995215526667, 999, '20220405')
+INSERT INTO KlientsKarte VALUES (6, 7666995215526667, 999, '20230714')
+INSERT INTO KlientsKarte VALUES (7, 8777995215526667, 999, '20230902')
+INSERT INTO KlientsKarte VALUES (8, 9888995215526667, 999, '20240312')
+INSERT INTO KlientsKarte VALUES (9, 4999995215526667, 999, '20240725')
+INSERT INTO KlientsKarte VALUES (10, 1212995215526667, 999, '20250512')
+
+INSERT INTO KlientsKarte VALUES (100, 3219952155266684, 276, '20220131')
+INSERT INTO KlientsKarte VALUES (99, 2312995215526667, 276, '20250512')
+INSERT INTO KlientsKarte VALUES (98, 4322995215526667, 276, '20230131')
+INSERT INTO KlientsKarte VALUES (97, 5433995215526667, 276, '20240131')
+INSERT INTO KlientsKarte VALUES (96, 6544995215526667, 276, '20220323')
+INSERT INTO KlientsKarte VALUES (95, 7655995215526667, 276, '20220405')
+INSERT INTO KlientsKarte VALUES (94, 8766995215526667, 276, '20230714')
+INSERT INTO KlientsKarte VALUES (93, 9877995215526667, 276, '20230902')
+INSERT INTO KlientsKarte VALUES (92, 1988995215526667, 276, '20240312')
+INSERT INTO KlientsKarte VALUES (91, 5099995215526667, 276, '20240725')
+
+-- kategorijas
+INSERT INTO kategorijas VALUES (NULL, NULL, NULL, 'Mobilie telefoni');
+INSERT INTO kategorijas VALUES (NULL, NULL, NULL, 'Datori');
+INSERT INTO kategorijas VALUES (NULL, NULL, NULL, 'Izklaižu tehnika');
+INSERT INTO kategorijas VALUES (NULL, NULL, NULL, 'Virtuves tehnika');
+INSERT INTO kategorijas VALUES (NULL, NULL, NULL, 'Sadzīves tehnika');
+INSERT INTO kategorijas VALUES (NULL, NULL, NULL, 'Mēbeles');
+INSERT INTO kategorijas VALUES (NULL, NULL, NULL, 'Ēdiens');
+
+-- preces
+INSERT INTO preces VALUES (NULL, NULL, NULL, 1, 'Telefons A', 'Nodrošina cilvēku komunkāciju', 100.00, 50.00);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 2, 'Telefons B', 'Nodrošina cilvēku komunkāciju', 200.00, 150.00);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 3, 'Telefons C', 'Nodrošina cilvēku komunkāciju', 300.00, 250.00);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 4, 'Telefons D', 'Nodrošina cilvēku komunkāciju', 400.00, 350.00);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 5, 'Telefons E', 'Nodrošina cilvēku komunkāciju', 500.00, 450.00);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 6, 'Telefons F', 'Nodrošina cilvēku komunkāciju', 600.00, 550.00);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 7, 'Telefons G', 'Nodrošina cilvēku komunkāciju', 700.00, 650.00);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 1, 'Telefons H', 'Nodrošina cilvēku komunkāciju', 800.00, 750.00);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 2, 'Telefons I', 'Nodrošina cilvēku komunkāciju', 900.00, 850.00);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 3, 'Telefons J', 'Nodrošina cilvēku komunkāciju', 1000.00, 950.00);
+
+INSERT INTO preces VALUES (NULL, NULL, NULL, 1, 'Televizors A', 'Ekrāna izšķirtspēja: 3840 x 2160, Izmērs: 60 collas', 100.00, 50.00);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 2, 'Televizors B', 'Ekrāna izšķirtspēja: 3840 x 2160, Izmērs: 60 collas', 200.00, 150.00);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 3, 'Televizors C', 'Ekrāna izšķirtspēja: 3840 x 2160, Izmērs: 60 collas', 300.00, 250.00);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 4, 'Televizors D', 'Ekrāna izšķirtspēja: 3840 x 2160, Izmērs: 60 collas', 400.00, 350.00);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 5, 'Televizors E', 'Ekrāna izšķirtspēja: 3840 x 2160, Izmērs: 60 collas', 500.00, 450.00);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 6, 'Televizors F', 'Ekrāna izšķirtspēja: 3840 x 2160, Izmērs: 60 collas', 600.00, 550.00);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 7, 'Televizors G', 'Ekrāna izšķirtspēja: 3840 x 2160, Izmērs: 60 collas', 700.00, 650.00);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 1, 'Televizors H', 'Ekrāna izšķirtspēja: 3840 x 2160, Izmērs: 60 collas', 800.00, 750.00);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 2, 'Televizors I', 'Ekrāna izšķirtspēja: 3840 x 2160, Izmērs: 60 collas', 900.00, 850.00);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 3, 'Televizors J', 'Ekrāna izšķirtspēja: 3840 x 2160, Izmērs: 60 collas', 1000.00, 950.00);
+
+INSERT INTO preces VALUES (NULL, NULL, NULL, 1, 'Portatīvais dators A', 'Procesora modelis: AMD Ryzen™ 5 4600H', 100.00, 50.00);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 2, 'Portatīvais dators B', 'Procesora modelis: AMD Ryzen™ 5 4600H', 200.00, 150.00);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 3, 'Portatīvais dators C', 'Procesora modelis: AMD Ryzen™ 5 4600H', 300.00, 250.00);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 4, 'Portatīvais dators D', 'Procesora modelis: AMD Ryzen™ 5 4600H', 400.00, 350.00);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 5, 'Portatīvais dators E', 'Procesora modelis: AMD Ryzen™ 5 4600H', 500.00, 450.00);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 6, 'Portatīvais dators F', 'Procesora modelis: AMD Ryzen™ 5 4600H', 600.00, 550.00);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 7, 'Portatīvais dators G', 'Procesora modelis: AMD Ryzen™ 5 4600H', 700.00, 650.00);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 1, 'Portatīvais dators H', 'Procesora modelis: AMD Ryzen™ 5 4600H', 800.00, 750.00);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 2, 'Portatīvais dators I', 'Procesora modelis: AMD Ryzen™ 5 4600H', 900.00, 850.00);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 3, 'Portatīvais dators J', 'Procesora modelis: AMD Ryzen™ 5 4600H', 1000.00, 950.00);
+
+INSERT INTO preces VALUES (NULL, NULL, NULL, 1, 'Blenderis A', 'Atļauj miksēt visdažādākās lietas', 100.00, NULL);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 2, 'Blenderis B', 'Atļauj miksēt visdažādākās lietas', 200.00, NULL);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 3, 'Blenderis C', 'Atļauj miksēt visdažādākās lietas', 300.00, NULL);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 4, 'Blenderis D', 'Atļauj miksēt visdažādākās lietas', 400.00, NULL);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 5, 'Blenderis E', 'Atļauj miksēt visdažādākās lietas', 500.00, NULL);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 6, 'Blenderis F', 'Atļauj miksēt visdažādākās lietas', 600.00, NULL);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 7, 'Blenderis G', 'Atļauj miksēt visdažādākās lietas', 700.00, NULL);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 1, 'Blenderis H', 'Atļauj miksēt visdažādākās lietas', 800.00, NULL);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 2, 'Blenderis I', 'Atļauj miksēt visdažādākās lietas', 900.00, NULL);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 3, 'Blenderis J', 'Atļauj miksēt visdažādākās lietas', 1000.00, NULL);
+
+INSERT INTO preces VALUES (NULL, NULL, NULL, 1, 'Veļas mašīna A', 'Mazgā drēbes', 100.00, NULL);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 2, 'Veļas mašīna B', 'Mazgā drēbes', 200.00, NULL);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 3, 'Veļas mašīna C', 'Mazgā drēbes', 300.00, NULL);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 4, 'Veļas mašīna D', 'Mazgā drēbes', 400.00, NULL);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 5, 'Veļas mašīna E', 'Mazgā drēbes', 500.00, NULL);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 6, 'Veļas mašīna F', 'Mazgā drēbes', 600.00, NULL);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 7, 'Veļas mašīna G', 'Mazgā drēbes', 700.00, NULL);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 1, 'Veļas mašīna H', 'Mazgā drēbes', 800.00, NULL);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 2, 'Veļas mašīna I', 'Mazgā drēbes', 900.00, NULL);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 3, 'Veļas mašīna J', 'Mazgā drēbes', 1000.00, NULL);
+
+INSERT INTO preces VALUES (NULL, NULL, NULL, 1, 'Gludeklis A', 'Gludina drēbes', 100.00, 50.00);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 2, 'Gludeklis B', 'Gludina drēbes', 200.00, 150.00);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 3, 'Gludeklis C', 'Gludina drēbes', 300.00, 250.00);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 4, 'Gludeklis D', 'Gludina drēbes', 400.00, 350.00);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 5, 'Gludeklis E', 'Gludina drēbes', 500.00, 450.00);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 6, 'Gludeklis F', 'Gludina drēbes', 600.00, 550.00);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 7, 'Gludeklis G', 'Gludina drēbes', 700.00, 650.00);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 1, 'Gludeklis H', 'Gludina drēbes', 800.00, 750.00);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 2, 'Gludeklis I', 'Gludina drēbes', 900.00, 850.00);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 3, 'Gludeklis J', 'Gludina drēbes', 1000.00, 950.00);
+
+INSERT INTO preces VALUES (NULL, NULL, NULL, 1, 'Čipši A', 'Tomātu garša', 100.00, 50.00);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 2, 'Čipši B', 'Tomātu garša', 200.00, 150.00);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 3, 'Čipši C', 'Tomātu garša', 300.00, 250.00);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 4, 'Čipši D', 'Tomātu garša', 400.00, 350.00);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 5, 'Čipši E', 'Tomātu garša', 500.00, 450.00);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 6, 'Čipši F', 'Tomātu garša', 600.00, 550.00);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 7, 'Čipši G', 'Tomātu garša', 700.00, 650.00);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 1, 'Čipši H', 'Tomātu garša', 800.00, 750.00);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 2, 'Čipši I', 'Tomātu garša', 900.00, 850.00);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 3, 'Čipši J', 'Tomātu garša', 1000.00, 950.00);
+
+INSERT INTO preces VALUES (NULL, NULL, NULL, 1, 'Serveris A', 'Veic dažādās darbības caur tīklu', 100.00, NULL);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 2, 'Serveris B', 'Veic dažādās darbības caur tīklu', 200.00, NULL);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 3, 'Serveris C', 'Veic dažādās darbības caur tīklu', 300.00, NULL);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 4, 'Serveris D', 'Veic dažādās darbības caur tīklu', 400.00, NULL);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 5, 'Serveris E', 'Veic dažādās darbības caur tīklu', 500.00, NULL);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 6, 'Serveris F', 'Veic dažādās darbības caur tīklu', 600.00, NULL);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 7, 'Serveris G', 'Veic dažādās darbības caur tīklu', 700.00, NULL);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 1, 'Serveris H', 'Veic dažādās darbības caur tīklu', 800.00, NULL);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 2, 'Serveris I', 'Veic dažādās darbības caur tīklu', 900.00, NULL);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 3, 'Serveris J', 'Veic dažādās darbības caur tīklu', 1000.00, NULL);
+
+INSERT INTO preces VALUES (NULL, NULL, NULL, 1, 'Dīvāns A', 'Sēdvieta', 100.00, NULL);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 2, 'Dīvāns B', 'Sēdvieta', 200.00, NULL);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 3, 'Dīvāns C', 'Sēdvieta', 300.00, NULL);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 4, 'Dīvāns D', 'Sēdvieta', 400.00, NULL);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 5, 'Dīvāns E', 'Sēdvieta', 500.00, NULL);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 6, 'Dīvāns F', 'Sēdvieta', 600.00, NULL);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 7, 'Dīvāns G', 'Sēdvieta', 700.00, NULL);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 1, 'Dīvāns H', 'Sēdvieta', 800.00, NULL);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 2, 'Dīvāns I', 'Sēdvieta', 900.00, NULL);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 3, 'Dīvāns J', 'Sēdvieta', 1000.00, NULL);
+
+INSERT INTO preces VALUES (NULL, NULL, NULL, 1, 'Klaviatūra A', 'Taustiņu apgaismojums: Jā', 100.00, 50.00);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 2, 'Klaviatūra B', 'Taustiņu apgaismojums: Jā', 200.00, 150.00);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 3, 'Klaviatūra C', 'Taustiņu apgaismojums: Jā', 300.00, 250.00);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 4, 'Klaviatūra D', 'Taustiņu apgaismojums: Jā', 400.00, 350.00);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 5, 'Klaviatūra E', 'Taustiņu apgaismojums: Jā', 500.00, 450.00);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 6, 'Klaviatūra F', 'Taustiņu apgaismojums: Jā', 600.00, 550.00);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 7, 'Klaviatūra G', 'Taustiņu apgaismojums: Jā', 700.00, 650.00);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 1, 'Klaviatūra H', 'Taustiņu apgaismojums: Jā', 800.00, 750.00);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 2, 'Klaviatūra I', 'Taustiņu apgaismojums: Jā', 900.00, 850.00);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 3, 'Klaviatūra J', 'Taustiņu apgaismojums: Jā', 1000.00, 950.00);
+
+INSERT INTO preces VALUES (NULL, NULL, NULL, 1, 'Pica A', 'Taustiņu apgaismojums: Jā', 1100.00, 50.00);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 2, 'Pica B', 'Taustiņu apgaismojums: Jā', 2200.00, 150.00);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 3, 'Pica C', 'Taustiņu apgaismojums: Jā', 3300.00, 250.00);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 4, 'Pica D', 'Taustiņu apgaismojums: Jā', 4400.00, 350.00);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 5, 'Pica E', 'Taustiņu apgaismojums: Jā', 5500.00, 450.00);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 6, 'Pica F', 'Taustiņu apgaismojums: Jā', 6600.00, 550.00);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 7, 'Pica G', 'Taustiņu apgaismojums: Jā', 7700.00, 650.00);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 1, 'Pica H', 'Taustiņu apgaismojums: Jā', 8800.00, 750.00);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 2, 'Pica I', 'Taustiņu apgaismojums: Jā', 9900.00, 850.00);
+INSERT INTO preces VALUES (NULL, NULL, NULL, 3, 'Pica J', 'Taustiņu apgaismojums: Jā', 1900.00, 950.00);
+
+-- Pasutijums
+INSERT INTO Pasutijums VALUES (50, 51, 50, '20210131', 500.00)
+INSERT INTO Pasutijums VALUES (49, 52, 49, '20210313', 1500.00)
+INSERT INTO Pasutijums VALUES (48, 53, 48, '20210407', 200.00)
+INSERT INTO Pasutijums VALUES (47, 54, 47, '20211224', 100.00)
+INSERT INTO Pasutijums VALUES (46, 55, 46, '20200111', 1000.00)
+INSERT INTO Pasutijums VALUES (45, 56, 45, '20190131', 700.00)
+INSERT INTO Pasutijums VALUES (44, 57, 44, '20190226', 1200.00)
+INSERT INTO Pasutijums VALUES (43, 58, 43, '20211101', 900.00)
+INSERT INTO Pasutijums VALUES (42, 59, 42, '20200614', 400.00)
+INSERT INTO Pasutijums VALUES (41, 60, 41, '20210919', 300.00)
+
+INSERT INTO Pasutijums VALUES (40, 61, 40, '20210131', 500.00)
+INSERT INTO Pasutijums VALUES (39, 62, 39, '20210313', 1500.00)
+INSERT INTO Pasutijums VALUES (38, 63, 38, '20210407', 200.00)
+INSERT INTO Pasutijums VALUES (37, 64, 37, '20211224', 100.00)
+INSERT INTO Pasutijums VALUES (36, 65, 36, '20200111', 1000.00)
+INSERT INTO Pasutijums VALUES (35, 66, 35, '20190131', 700.00)
+INSERT INTO Pasutijums VALUES (34, 67, 34, '20190226', 1200.00)
+INSERT INTO Pasutijums VALUES (33, 68, 33, '20211101', 900.00)
+INSERT INTO Pasutijums VALUES (32, 69, 32, '20200614', 400.00)
+INSERT INTO Pasutijums VALUES (31, 70, 31, '20210919', 300.00)
+
+INSERT INTO Pasutijums VALUES (30, 71, 30, '20210131', 500.00)
+INSERT INTO Pasutijums VALUES (29, 72, 29, '20210313', 1500.00)
+INSERT INTO Pasutijums VALUES (28, 73, 28, '20210407', 200.00)
+INSERT INTO Pasutijums VALUES (27, 74, 27, '20211224', 100.00)
+INSERT INTO Pasutijums VALUES (26, 75, 26, '20200111', 1000.00)
+INSERT INTO Pasutijums VALUES (25, 76, 25, '20190131', 700.00)
+INSERT INTO Pasutijums VALUES (24, 77, 24, '20190226', 1200.00)
+INSERT INTO Pasutijums VALUES (24, 77, 24, '20190226', 200.00)
+INSERT INTO Pasutijums VALUES (24, 77, 24, '20190225', 200.00)
+INSERT INTO Pasutijums VALUES (23, 78, 23, '20211101', 900.00)
+INSERT INTO Pasutijums VALUES (22, 79, 22, '20200614', 400.00)
+INSERT INTO Pasutijums VALUES (21, 80, 21, '20210919', 300.00)
+
+INSERT INTO Pasutijums VALUES (100, 81, 61, '20210131', 500.00)
+INSERT INTO Pasutijums VALUES (99, 82, 62, '20210313', 1500.00)
+INSERT INTO Pasutijums VALUES (98, 83, 63, '20210407', 200.00)
+INSERT INTO Pasutijums VALUES (97, 84, 64, '20211224', 100.00)
+INSERT INTO Pasutijums VALUES (96, 85, 65, '20200111', 1000.00)
+INSERT INTO Pasutijums VALUES (95, 86, 66, '20190131', 700.00)
+INSERT INTO Pasutijums VALUES (94, 87, 67, '20190226', 1200.00)
+INSERT INTO Pasutijums VALUES (93, 88, 68, '20211101', 900.00)
+INSERT INTO Pasutijums VALUES (92, 89, 69, '20200614', 400.00)
+INSERT INTO Pasutijums VALUES (91, 90, 70, '20210919', 300.00)
+INSERT INTO Pasutijums VALUES (91, 90, 70, '20210919', 300.00)
+INSERT INTO Pasutijums VALUES (91, 90, 70, '20210919', 200.00)
+
+INSERT INTO Pasutijums VALUES (100, 1, 61, '20210131', 500.00)
+INSERT INTO Pasutijums VALUES (99, 2, 62, '20210313', 1500.00)
+INSERT INTO Pasutijums VALUES (98, 3, 63, '20210407', 200.00)
+INSERT INTO Pasutijums VALUES (97, 4, 64, '20211224', 100.00)
+INSERT INTO Pasutijums VALUES (96, 5, 65, '20200111', 1000.00)
+INSERT INTO Pasutijums VALUES (95, 6, 66, '20190131', 700.00)
+INSERT INTO Pasutijums VALUES (94, 7, 67, '20190226', 1200.00)
+INSERT INTO Pasutijums VALUES (93, 8, 68, '20211101', 900.00)
+INSERT INTO Pasutijums VALUES (92, 9, 69, '20200614', 400.00)
+INSERT INTO Pasutijums VALUES (91, 10, 70, '20210919', 300.00)
+
+-- Pasutijums Prece
+INSERT INTO PasutijumsPrece VALUES (1, 1, 10)
+INSERT INTO PasutijumsPrece VALUES (40, 2, 1)
+INSERT INTO PasutijumsPrece VALUES (45, 2, 1)
+INSERT INTO PasutijumsPrece VALUES (72, 3, 1)
+INSERT INTO PasutijumsPrece VALUES (51, 4, 2)
+INSERT INTO PasutijumsPrece VALUES (30, 5, 1)
+INSERT INTO PasutijumsPrece VALUES (11, 5, 1)
+INSERT INTO PasutijumsPrece VALUES (63, 6, 2)
+INSERT INTO PasutijumsPrece VALUES (72, 6, 1)
+INSERT INTO PasutijumsPrece VALUES (81, 7, 2)
+INSERT INTO PasutijumsPrece VALUES (82, 7, 2)
+INSERT INTO PasutijumsPrece VALUES (83, 7, 2)
+INSERT INTO PasutijumsPrece VALUES (95, 8, 2)
+INSERT INTO PasutijumsPrece VALUES (71, 9, 1)
+INSERT INTO PasutijumsPrece VALUES (73, 9, 1)
+INSERT INTO PasutijumsPrece VALUES (51, 10, 1)
+INSERT INTO PasutijumsPrece VALUES (61, 10, 1)
+INSERT INTO PasutijumsPrece VALUES (31, 10, 1)
+INSERT INTO PasutijumsPrece VALUES (21, 10, 1)
+INSERT INTO PasutijumsPrece VALUES (11, 10, 1)
+
+INSERT INTO PasutijumsPrece VALUES (1, 11, 10)
+INSERT INTO PasutijumsPrece VALUES (40, 12, 1)
+INSERT INTO PasutijumsPrece VALUES (45, 12, 1)
+INSERT INTO PasutijumsPrece VALUES (72, 13, 1)
+INSERT INTO PasutijumsPrece VALUES (51, 14, 2)
+INSERT INTO PasutijumsPrece VALUES (30, 15, 1)
+INSERT INTO PasutijumsPrece VALUES (11, 15, 1)
+INSERT INTO PasutijumsPrece VALUES (63, 16, 2)
+INSERT INTO PasutijumsPrece VALUES (72, 16, 1)
+INSERT INTO PasutijumsPrece VALUES (81, 17, 2)
+INSERT INTO PasutijumsPrece VALUES (82, 17, 2)
+INSERT INTO PasutijumsPrece VALUES (83, 17, 2)
+INSERT INTO PasutijumsPrece VALUES (95, 18, 2)
+INSERT INTO PasutijumsPrece VALUES (71, 19, 1)
+INSERT INTO PasutijumsPrece VALUES (73, 19, 1)
+INSERT INTO PasutijumsPrece VALUES (51, 20, 1)
+INSERT INTO PasutijumsPrece VALUES (61, 20, 1)
+INSERT INTO PasutijumsPrece VALUES (31, 20, 1)
+INSERT INTO PasutijumsPrece VALUES (21, 20, 1)
+INSERT INTO PasutijumsPrece VALUES (11, 20, 1)
+
+INSERT INTO PasutijumsPrece VALUES (1, 21, 10)
+INSERT INTO PasutijumsPrece VALUES (40, 22, 1)
+INSERT INTO PasutijumsPrece VALUES (45, 22, 1)
+INSERT INTO PasutijumsPrece VALUES (72, 23, 1)
+INSERT INTO PasutijumsPrece VALUES (51, 24, 2)
+INSERT INTO PasutijumsPrece VALUES (30, 25, 1)
+INSERT INTO PasutijumsPrece VALUES (11, 25, 1)
+INSERT INTO PasutijumsPrece VALUES (63, 26, 2)
+INSERT INTO PasutijumsPrece VALUES (72, 26, 1)
+INSERT INTO PasutijumsPrece VALUES (81, 27, 2)
+INSERT INTO PasutijumsPrece VALUES (82, 27, 2)
+INSERT INTO PasutijumsPrece VALUES (83, 27, 2)
+INSERT INTO PasutijumsPrece VALUES (95, 28, 2)
+INSERT INTO PasutijumsPrece VALUES (71, 29, 1)
+INSERT INTO PasutijumsPrece VALUES (73, 29, 1)
+INSERT INTO PasutijumsPrece VALUES (51, 30, 1)
+INSERT INTO PasutijumsPrece VALUES (61, 30, 1)
+INSERT INTO PasutijumsPrece VALUES (31, 30, 1)
+INSERT INTO PasutijumsPrece VALUES (21, 30, 1)
+INSERT INTO PasutijumsPrece VALUES (11, 30, 1)
+
+INSERT INTO PasutijumsPrece VALUES (1, 31, 10)
+INSERT INTO PasutijumsPrece VALUES (40, 32, 1)
+INSERT INTO PasutijumsPrece VALUES (45, 32, 1)
+INSERT INTO PasutijumsPrece VALUES (72, 33, 1)
+INSERT INTO PasutijumsPrece VALUES (51, 34, 2)
+INSERT INTO PasutijumsPrece VALUES (30, 35, 1)
+INSERT INTO PasutijumsPrece VALUES (11, 35, 1)
+INSERT INTO PasutijumsPrece VALUES (63, 36, 2)
+INSERT INTO PasutijumsPrece VALUES (72, 36, 1)
+INSERT INTO PasutijumsPrece VALUES (81, 37, 2)
+INSERT INTO PasutijumsPrece VALUES (82, 37, 2)
+INSERT INTO PasutijumsPrece VALUES (83, 37, 2)
+INSERT INTO PasutijumsPrece VALUES (95, 38, 2)
+INSERT INTO PasutijumsPrece VALUES (71, 39, 1)
+INSERT INTO PasutijumsPrece VALUES (73, 39, 1)
+INSERT INTO PasutijumsPrece VALUES (51, 40, 1)
+INSERT INTO PasutijumsPrece VALUES (61, 40, 1)
+INSERT INTO PasutijumsPrece VALUES (31, 40, 1)
+INSERT INTO PasutijumsPrece VALUES (21, 40, 1)
+INSERT INTO PasutijumsPrece VALUES (11, 40, 1)
+
+INSERT INTO PasutijumsPrece VALUES (1, 41, 10)
+INSERT INTO PasutijumsPrece VALUES (40, 42, 1)
+INSERT INTO PasutijumsPrece VALUES (45, 42, 1)
+INSERT INTO PasutijumsPrece VALUES (72, 43, 1)
+INSERT INTO PasutijumsPrece VALUES (51, 44, 2)
+INSERT INTO PasutijumsPrece VALUES (30, 45, 1)
+INSERT INTO PasutijumsPrece VALUES (11, 45, 1)
+INSERT INTO PasutijumsPrece VALUES (63, 46, 2)
+INSERT INTO PasutijumsPrece VALUES (72, 46, 1)
+INSERT INTO PasutijumsPrece VALUES (81, 47, 2)
+INSERT INTO PasutijumsPrece VALUES (82, 47, 2)
+INSERT INTO PasutijumsPrece VALUES (83, 47, 2)
+INSERT INTO PasutijumsPrece VALUES (95, 48, 2)
+INSERT INTO PasutijumsPrece VALUES (71, 49, 1)
+INSERT INTO PasutijumsPrece VALUES (73, 49, 1)
+INSERT INTO PasutijumsPrece VALUES (51, 50, 1)
+INSERT INTO PasutijumsPrece VALUES (61, 50, 1)
+INSERT INTO PasutijumsPrece VALUES (31, 50, 1)
+INSERT INTO PasutijumsPrece VALUES (21, 50, 1)
+INSERT INTO PasutijumsPrece VALUES (11, 50, 1)
+
+SELECT epasts FROM Klients
+WHERE 
+	NOT EXISTS(SELECT * FROM KlientsKarte WHERE Klients.id = KlientsKarte.klients_id) 
+	AND
+	EXISTS(SELECT * FROM Adrese WHERE Klients.id = Adrese.klients_id)
+-- Atlasam klientus, kuri nav pievienojuši savu maksājumu karti mājaslapā un atlasam to epastus, lai varētu tiem nosūtīt ziņu,
+-- ja tie izlem pievienot savu karti šīs nedēļas laikā, tie saņem atlaidi savam nākamajam pirkumam.
+
+SELECT *
+FROM Prece
+WHERE Prece.cena > 500 AND Prece.kategorija_id = 2
+ORDER BY Prece.nosaukums
+-- Atlasam visas preces kategorijā 'Datori' un pārbaudam vai to cenas ir lielākas par 500.00, kā arī
+-- kārtojam šīs preces pēc nosaukuma alfabētiskā secībā, šādi simulējot filtrus, ko kāds lietotājs vārētu izvēlēties mājaslapā.
+
+SELECT Klients.epasts, Klients.vards, Klients.uzvards, Klients.telefona_nr, Adrese.pilseta, KlientsKarte.numurs FROM Klients
+JOIN Adrese ON Klients.id = Adrese.klients_id
+JOIN KlientsKarte ON Klients.id = KlientsKarte.klients_id
+WHERE Klients.telefona_nr IS NOT NULL
+-- Apvienojam trīs tabulas un no katras tabulas izvēlamies noteiktas kollonas, papildus pārbaudam vai lietotājs ir pievienojis telefona
+-- numuru, iegūto informāciju varētu attēlot lietotāja profilā
+
+SELECT pilseta, pasta_indekss, COUNT (id) lietotaju_skaits
+FROM Adrese
+GROUP BY pilseta, pasta_indekss
+-- No adrešu tabulas atlasam pilsētu un pasta indeksu kombinācijas un aprēķinam lietotāju skaitu šajā lokācijā
+
+SELECT Pasutijums.id, PasutijumsPrece.skaits, Prece.nosaukums, Prece.cena, Prece.atlaides_cena, Pasutijums.datums, Pasutijums.cena AS pasutijuma_kopsumma 
+FROM PasutijumsPrece
+JOIN Prece ON PasutijumsPrece.prece_id = Prece.id
+JOIN Pasutijums ON PasutijumsPrece.pasutijums_id = Pasutijums.id
+ORDER BY Pasutijums.datums
+-- Apvienojam trīs tabulas un no katras tabulas izvēlamies noteiktas kollonas, kārtojam tās pēc pasūtījuma datuma,
+-- šo atlasi varētu izmantot, lai pārskatītu pasūtītās preces pasūtījumos
+
+SELECT id, kategorija_id, nosaukums, cena, RANK () OVER ( PARTITION BY kategorija_id ORDER BY cena DESC) cenas_vieta
+FROM Prece
+-- Atlasam preces pēc to kategorijas un cenas, šos datus varētu izmantot, lai atlasītu dārgākās preces noteiktā kategorijā
+-- rank tiek izmantots, lai redzētu preces vietu atkarībā no citām precēm tajā pašā kategorijā.
+
+SELECT DISTINCT datums, SUM (cena) OVER (PARTITION BY datums) ieguvumi
+FROM Pasutijums
+ORDER BY ieguvumi DESC
+-- Atlasam pasūtījumus pēc to veiktā datuma un aprēķinam ieguvumus tajā dienā no visiem veiktajiem pasūtījumiem
+
+SELECT DISTINCT Klients.id, Klients.epasts, Klients.vards, Klients.uzvards, 
+	COUNT(*) OVER (PARTITION BY Pasutijums.klients_id) veiktie_pasutijumi,
+	SUM(Pasutijums.cena) OVER (PARTITION BY Pasutijums.klients_id) pasutijumu_ieguvumi
+FROM Klients, Pasutijums
+WHERE Pasutijums.klients_id = Klients.id
+-- Apvienojam klientu un pasūtījumu tabulas, iegūstam lietotāja veikto pasūtījumu skaitu, kā arī šo pasūtījumu kopējo cenu
