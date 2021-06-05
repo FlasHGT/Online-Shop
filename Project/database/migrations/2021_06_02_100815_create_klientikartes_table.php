@@ -16,7 +16,7 @@ class CreateKlientikartesTable extends Migration
         Schema::create('klientikartes', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->foreignId('klients_id')->references('id')->on('users');
+            $table->foreignId('klients_id')->nullable()->references('id')->on('users');
             $table->decimal('numurs', 16, 0);
             $table->decimal('CVC', 3, 0);
             $table->date('termins_lidz');

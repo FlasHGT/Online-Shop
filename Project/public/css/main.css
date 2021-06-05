@@ -1,6 +1,111 @@
+h1 {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.table {
+    margin: 10px 0px;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table img {
+    display: inline-block;
+}
+
+.table td, .table th{
+    padding:12px 15px;
+    border:1px solid #ddd;
+    text-align: center;
+    font-size:16px;
+}
+
+.table th{
+    background-color: #7690da;
+    color:white;
+}
+
+.table tr{
+    font-weight: bold;
+}
+
+.table tbody tr:nth-child(even){
+    background-color: #f5f5f5;
+}
+
+@media(max-width: 500px){
+    .table thead{
+        display: none;
+    }
+
+    .table, .table tbody, .table tr, .table td{
+        display: block;
+        width: 100%;
+    }
+    .table tr{
+        margin-bottom:15px;
+    }
+    .table td{
+        text-align: right;
+        padding-left: 50%;
+        text-align: right;
+        position: relative;
+    }
+    .table td::before{
+        content: attr(data-label);
+        position: absolute;
+        left:0;
+        width: 50%;
+        padding-left:15px;
+        font-size:15px;
+        font-weight: bold;
+        text-align: left;
+    }
+}
+
+/* PROFILE LAYOUT */
+.profile {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile button {
+    margin: 10px 10px 10px 0px;
+}
+
+.profile-add-button {
+    width: 150px;
+    text-align: center;
+    display: inline-block;
+}
+
+.profile span {
+    color: #7690da;
+    font-weight: normal;
+}
+
+.profile p {
+    font-weight: bold;
+}
+
+.profile-item {
+    margin-left: 25px;
+}
+
+.profile-item-child {
+    display: flex;
+    flex-direction: row;
+}
+
+.profile-item-child-div {
+    padding-right: 25px;
+}
+
+.sub-form-btn {
+    display: inline-flex;
+}
 
 /* PRODUCT LAYOUT */
-
 .prod {
     display: flex;
     justify-content: flex-start;

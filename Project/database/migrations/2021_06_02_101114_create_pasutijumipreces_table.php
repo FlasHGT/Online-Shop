@@ -17,7 +17,7 @@ class CreatePasutijumiprecesTable extends Migration
             $table->id();
             $table->timestamps();
             $table->foreignId('prece_id')->references('id')->on('preces');
-            $table->foreignId('pasutijums-id')->references('id')->on('pasutijumi');
+            $table->foreignId('pasutijums_id')->references('id')->on('pasutijumi');
             $table->integer('skaits');
         });
     }

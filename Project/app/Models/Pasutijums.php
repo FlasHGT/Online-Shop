@@ -14,6 +14,8 @@ class Pasutijums extends Model
 {
     use HasFactory;
     
+    protected $table = 'pasutijumi';
+    
     public function user()
     {
         return $this->belongsTo(User::class);

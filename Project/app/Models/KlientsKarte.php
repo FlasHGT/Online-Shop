@@ -12,6 +12,8 @@ class KlientsKarte extends Model
 {
     use HasFactory;
     
+    protected $table = 'klientikartes';
+    
     public function user()
     {
         return $this->belongsTo(User::class);

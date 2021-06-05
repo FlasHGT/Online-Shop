@@ -16,7 +16,7 @@ class CreateAdresesTable extends Migration
         Schema::create('adreses', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->foreignId('klients_id')->references('id')->on('users');
+            $table->foreignId('klients_id')->nullable()->references('id')->on('users');
             $table->string('pilseta');
             $table->string('iela');
             $table->integer('majas_nr');

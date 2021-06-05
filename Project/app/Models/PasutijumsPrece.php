@@ -12,6 +12,8 @@ class PasutijumsPrece extends Model
 {
     use HasFactory;
     
+    protected $table = 'pasutijumipreces';
+    
     public function prece()
     {
         return $this->belongsTo(Prece::class);
