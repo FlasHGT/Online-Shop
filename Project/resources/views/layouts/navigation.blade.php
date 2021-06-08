@@ -22,21 +22,13 @@
             
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center">                             
-                <div class="dropdown mr-5">
-<!--                    TODO: Add a hyperlink-->
+                <div class="mr-5">
                     <form method="GET" action="{{ route('cart') }}">
                     @csrf
                         <button class="nav_btn flex items-center">  
                             <i class="fas fa-shopping-cart"></i>
                         </button>
                     </form>
-
-                    <div class="dropdown-content">
-                        <!--TODO: Add hyperlinks to products and create this list dynamically-->
-                        <x-dropdown-link href="{{ route('cart') }}">Link 1</x-dropdown-link>
-                        <x-dropdown-link href="#">Link 2</x-dropdown-link>
-                        <x-dropdown-link href="#">Link 3</x-dropdown-link>
-                    </div>
                 </div>
 
                 <div class="dropdown mr-5">

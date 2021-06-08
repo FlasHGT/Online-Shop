@@ -17,8 +17,21 @@
                                 <a href="{{ url('product/' . $item->id) }}">
                                     <img src="{{ asset('img/test.png') }}" alt="alt"/>
                                     <h1>{{ $item->nosaukums }}</h1>
-                                    <h2>{{ $item->cena }}</h2>
                                 </a>
+                                @if ($item->atlaides_cena)
+                                    <p class="main-price"><del>{{ $item->cena }}.00 €</del></p>
+                                    <p class="main-price"><span style="color:red;">{{ $item->atlaides_cena }}.00 €</span></p>
+                                @else
+                                    <p class="main-price">{{ $item->cena }}.00 €</p>
+                                @endif
+
+                                <x-button class="main-btn" item-id="{{ $item->id }}" type="button">
+                                    @if ($item->inCart == 0)
+                                        Add To Cart
+                                    @else
+                                        Remove From Cart
+                                    @endif
+                                </x-button>
                             </div> 
                         @endforeach
                     </div>
@@ -31,4 +44,29 @@
             </div>
         </div>
     </div>
+    
+    <script>
+        $(document).ready(function () {    
+            $(".main-btn").on('click', function (e) {
+                var url = "{{ url('cart') }}";
+                var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: { id: $(e.target).attr('item-id'), _token: CSRF_TOKEN },
+                    success: function (data) {
+                        if ($(e.target).text().trim() === "Add To Cart") {
+                            $(e.target).text("Remove From Cart");   
+                        }
+                        else {
+                            $(e.target).text("Add To Cart");   
+                        }
+                    },
+                    error: function (data) {
+                        console.log('Error:', data);
+                    }
+                });
+            })
+        });        
+    </script>        
 </x-app-layout>

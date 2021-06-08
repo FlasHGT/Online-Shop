@@ -17,9 +17,12 @@ use App\Http\Controllers\ItemController;
 */
 
 Route::get('/', [ItemController::class, 'showMain'])->name('main');
-Route::get('product/{id}', [ItemController::class, 'showProduct'])->name('product.show');
+Route::get('product/{id}', [ItemController::class, 'showProduct'])->name('product');
 
+Route::post('cart', [OrderController::class, 'addOrRemoveFromCart']);
 Route::get('cart', [OrderController::class, 'showCart'])->name('cart');
+
+Route::post('cart/qty', [OrderController::class, 'changeQuantity']);
 
 Route::get('profile', [UserController::class, 'showProfile'])->name('profile')->middleware(['auth']);
 

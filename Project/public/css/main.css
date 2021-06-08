@@ -3,6 +3,11 @@ h1 {
     font-weight: bold;
 }
 
+del{
+    font-weight: normal;
+    margin-right: 10px;
+}
+
 .table {
     margin: 10px 0px;
     width: 100%;
@@ -63,6 +68,46 @@ h1 {
     }
 }
 
+/* CART LAYOUT */
+
+.cart {
+    font-weight: bold;
+}
+
+.cart-buttons button {
+    width: 50px;
+    display: inline-block;
+}
+
+.cart-order {
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.cart-order button, h1  {
+    font-size: 1.5em;
+    margin: 10px 10px 0px auto;
+}
+
+.img-button {
+    display: flex;
+    flex-direction: column;
+}
+
+.img-button button {
+    width: 200px;
+    margin: auto;
+    margin-top: 10px;
+    display: inline-block;
+}
+
+.img-button img {
+    width: 200px;
+    height: 200px;
+    margin: auto;
+}
+
 /* PROFILE LAYOUT */
 .profile {
     display: flex;
@@ -111,11 +156,32 @@ h1 {
     justify-content: flex-start;
 }
 
+.prod-btn {
+    margin: 10px 0px;
+    display: inline-block;
+    width: 100%;
+}
+
 .prod-content {
+    flex-direction: column;
+    display: flex;
+    flex-grow: 1;
     margin-left: 20px;
+    font-weight: bold;
+    height: 200px;
+}
+
+.prod-desc {
+    flex-grow: 1;
+}
+
+.prod-price {
+    margin-left: auto;
+    font-size: 1.1em;
 }
 
 /* MAIN LAYOUT */
+
 .items{
     display: flex;
     justify-content: flex-start;
@@ -123,7 +189,23 @@ h1 {
 }
 
 .item {
+    display: flex;
+    flex-direction: column;
     padding: 25px 5px 25px 25px;
+}
+
+.main-btn {
+    width: 100%;
+    display: inline-block;
+}
+
+.item h1 {
+    font-size: 1.1em;
+}
+
+.main-price {
+    font-weight: bold;
+    margin-left: auto;
 }
 
 .bot-nav p {

@@ -20,12 +20,33 @@ class ItemController extends Controller
     public function showMain()
     {
         $items = Prece::paginate(15);
+       
+        foreach ($items as $item)
+        {
+            $item->push('inCart');
+            $item->inCart = 0;
+            
+            if (session()->has('items') && in_array($item->id, session()->get('items'))) 
+            {
+                $item->inCart = 1;
+            }
+        }    
+        
         return view('main', compact('items'));
     }
     
     public function showProduct($id)
     {
-        $item = Prece::findOrFail($id);
+        $item = Prece::find($id);
+        
+        $item->push('inCart');
+        $item->inCart = 0;
+        
+        if (session()->has('items') && in_array($item->id, session()->get('items'))) 
+        {
+            $item->inCart = 1;
+        }
+        
         return view('product', compact('item'));
     }
     
