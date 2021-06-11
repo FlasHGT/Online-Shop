@@ -85,7 +85,12 @@ del{
     
 }
 
-.cart-order button, h1  {
+.cart-order button {
+    font-size: 1.5em;
+    margin: 10px 10px 0px auto;
+}
+
+.cart-order h1 {
     font-size: 1.5em;
     margin: 10px 10px 0px auto;
 }
@@ -171,6 +176,10 @@ del{
     height: 200px;
 }
 
+.prod-content h1 {
+    margin-right: auto;
+}
+
 .prod-desc {
     flex-grow: 1;
 }
@@ -181,6 +190,68 @@ del{
 }
 
 /* MAIN LAYOUT */
+
+.main-container {
+    display: flex;
+}
+
+.main-filters {
+    margin-left: auto;
+    width: 300px;
+}
+
+.main-filters-items {
+    display: flex;
+    flex-direction: column;
+}
+
+.main-filters-items h1{
+    margin: 0px;
+}
+
+.filter-name {
+    font-size: 1.2em;
+}
+
+.main-filter-container {
+    margin: 5px 0px 5px 10px;
+}
+
+.category-name-selected {
+    color: #7690da;
+}
+
+.category-name {
+    font-size: 1.2em;
+}
+
+.filter-name:hover {
+    color: #3e8e41;
+    font-weight: bold;
+}
+
+.category-name:hover {
+    color: #3e8e41;
+    font-weight: bold;
+}
+
+.category-name-selected:hover {
+    color: #7690da;
+}
+
+.current-filter {
+    font-size: 1em;
+    margin-left: 5px;
+}
+
+.main-items {
+    width: 100%;
+    margin-right: auto;
+}
+
+.main-filters {
+    display: flex;
+}
 
 .items{
     display: flex;
@@ -317,4 +388,4 @@ del{
 .dropdown:hover .dropdown-content {display: block;}
 
 /* Change the background color of the dropdown button when the dropdown content is shown */
-.dropdown:hover .nav_btn {background-color: #3e8e41;}
+.nav_btn:hover {background-color: #3e8e41;}

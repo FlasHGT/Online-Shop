@@ -1,8 +1,4 @@
 <x-app-layout>
-    <x-slot name="header">
-        
-    </x-slot>
-    
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -32,7 +28,7 @@
                                     <p>{{ $card->numurs }}</p>
                                 </td>
                                 <td data-label="Order Date">{{ $order->izpildes_datums }}</td>
-                                <td data-label="Total Price">{{ $order->cena }}</td>
+                                <td data-label="Total Price">{{ number_format($order->cena, 2) }} €</td>
                             </tr>   
                         </tbody>
                     </table>
@@ -53,19 +49,11 @@
                                 <td data-label="Picture"><a href="{{ url('product/' . $item_ids[$x]->prece_id) }}"><img src="{{ asset('img/test.png') }}" alt="alt"/></a></td>
                                 <td data-label="Name"><a href="{{ url('product/' . $item_ids[$x]->prece_id) }}">{{ $items[$x]['nosaukums'] }}</a></td>
                                 <td data-label="Item Price">  
-                                    @if ($items[$x]['atlaides_cena'])
-                                        {{ $items[$x]['atlaides_cena'] }}     
-                                    @else 
-                                        {{ $items[$x]['cena'] }}  
-                                    @endif
+                                    {{ number_format($items[$x]['cena'], 2) }} €
                                 </td>
                                 <td data-label="Amount">{{ $item_ids[$x]->skaits }}</td>
                                 <td data-label="Total Item Price">  
-                                    @if ($items[$x]['atlaides_cena'])
-                                        {{ $items[$x]['atlaides_cena'] * $item_ids[$x]->skaits }}     
-                                    @else 
-                                        {{ $items[$x]['cena'] * $item_ids[$x]->skaits }}  
-                                    @endif
+                                    {{ number_format($items[$x]['cena'] * $item_ids[$x]->skaits, 2) }} €
                                 </td>
                             </tr>
                             @endfor

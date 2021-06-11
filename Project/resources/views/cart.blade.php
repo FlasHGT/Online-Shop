@@ -1,8 +1,4 @@
 <x-app-layout>
-    <x-slot name="header">
-        
-    </x-slot>
-    
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -28,11 +24,7 @@
                                             </td>
                                             <td data-label="Item Name"><a href="{{ url('product/' . $items[$x]['id']) }}">{{ $items[$x]['nosaukums'] }}</a></td>
                                             <td data-label="Item Price">
-                                                @if ($items[$x]['atlaides_cena'])
-                                                    {{ $items[$x]['atlaides_cena'] }}.00 €
-                                                @else
-                                                    {{ $items[$x]['cena'] }}.00 €
-                                                @endif
+                                                {{ number_format($items[$x]['cena'], 2) }} €
                                             </td>
                                             <td class="cart-count" data-label="Item Count">
                                                 <div class="cart-buttons">
@@ -41,12 +33,8 @@
                                                     <x-button item-id="{{ $items[$x]['id'] }}" increase=1 class="qty-btn" type="button">+</x-button>
                                                 </div>
                                             </td>
-                                            <td class="total-item {{ 'total-item' . $items[$x]['id'] }}" qty={{ $item_qty[$x] }} val={{ $items[$x]['atlaides_cena'] ? $items[$x]['atlaides_cena'] : $items[$x]['cena'] }} data-label="Item Total">
-                                                @if ($items[$x]['atlaides_cena'])
-                                                    {{ $items[$x]['atlaides_cena'] * $item_qty[$x] }}.00 €
-                                                @else
-                                                    {{ $items[$x]['cena'] * $item_qty[$x] }}.00 €
-                                                @endif
+                                            <td class="total-item {{ 'total-item' . $items[$x]['id'] }}" qty={{ $item_qty[$x] }} val={{ $items[$x]['cena'] }} data-label="Item Total">
+                                                {{ number_format($items[$x]['cena'] * $item_qty[$x], 2) }} €
                                             </td>
                                         </tr>
                                     @endfor

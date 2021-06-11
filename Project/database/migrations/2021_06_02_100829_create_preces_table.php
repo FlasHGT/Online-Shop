@@ -20,7 +20,8 @@ class CreatePrecesTable extends Migration
             $table->string('nosaukums');
             $table->string('apraksts');
             $table->double('cena');
-            $table->double('atlaides_cena')->nullable();
+            $table->double('sakuma_cena');
+            $table->integer('atlaides_procenti')->nullable();
         });
     }
 

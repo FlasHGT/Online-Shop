@@ -1,8 +1,4 @@
 <x-app-layout>
-    <x-slot name="header">
-        
-    </x-slot>
-    
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -36,7 +32,7 @@
                                             <p>{{ $cards[$x]['numurs'] }}</p>
                                         </td>
                                         <td data-label="Order Date">{{ $orders[$x]->izpildes_datums }}</td>
-                                        <td data-label="Total Price">{{ $orders[$x]->cena }}</td>
+                                        <td data-label="Total Price">{{ number_format($orders[$x]->cena, 2) }} €</td>
                                         <td data-label="Items"><a href="{{ url('order/' . $orders[$x]->id) }}"><x-button type="button">View</x-button></a></td>
                                     </tr>   
                                 @endfor

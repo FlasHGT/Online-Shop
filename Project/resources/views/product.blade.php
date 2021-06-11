@@ -1,8 +1,4 @@
 <x-app-layout>
-    <x-slot name="header">
-        
-    </x-slot>
-    
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -22,11 +18,12 @@
                             <h1>{{ $item->nosaukums }}</h1>
                             <p class="prod-desc">{{ $item->apraksts }}</p>
                             
-                            @if ($item->atlaides_cena)
-                                <p class="prod-price"><del>{{ $item->cena }}.00 €</del></p>
-                                <p class="prod-price"><span style="color:red;">{{ $item->atlaides_cena }}.00 €</span></p>
+                            @if ($item->atlaides_procenti)
+                                <p class="prod-price"><del>{{ number_format($item->sakuma_cena, 2) }} €</del></p>
+                                <p class="prod-price"><span style="color:red;">{{ number_format($item->cena, 2) }} €</span></p>
                             @else
-                                <p class="prod-price">{{ $item->cena }}.00 €</p>
+                                <br>
+                                <p class="prod-price">{{ number_format($item->cena, 2) }} €</p>
                             @endif
                         </div>
                         

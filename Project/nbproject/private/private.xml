@@ -5,10 +5,9 @@
         <group>
             <file>file:/C:/wamp64/www/georgs/app/Http/Controllers/ItemController.php</file>
             <file>file:/C:/wamp64/www/georgs/public/css/main.css</file>
-            <file>file:/C:/wamp64/www/georgs/resources/views/cart.blade.php</file>
             <file>file:/C:/wamp64/www/georgs/routes/web.php</file>
-            <file>file:/C:/wamp64/www/georgs/app/Http/Controllers/OrderController.php</file>
             <file>file:/C:/wamp64/www/georgs/resources/views/main.blade.php</file>
+            <file>file:/C:/wamp64/www/georgs/app/helpers.php</file>
         </group>
     </open-files>
 </project-private>

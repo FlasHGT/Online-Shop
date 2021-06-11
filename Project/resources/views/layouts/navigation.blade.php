@@ -13,10 +13,14 @@
 
             <div class="flex items-center search_wrap search_wrap_1">
                 <div class="search_box">
-                    <input type="text" class="input" placeholder="Search...">
-                    <div class="btn btn_common">
-                        <i class="fas fa-search"></i>
-                    </div>
+                    <form method="GET" action="{{action([App\Http\Controllers\ItemController::class, 'showMain'])}}">
+                        <input type="text" name="search" id="search" class="input" placeholder="Search..." value="{{ old('search')}}">
+                        <button type="submit"> 
+                            <div class="btn btn_common">
+                                <i class="fas fa-search"></i>
+                            </div>
+                        </button>
+                    </form>
                 </div>
             </div>
             
