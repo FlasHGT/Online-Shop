@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\LanguageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +17,8 @@ use App\Http\Controllers\ItemController;
 |
 */
 
+Route::get('lang/{locale}',LanguageController::class);
+
 Route::get('/', [ItemController::class, 'showMain'])->name('main');
 Route::get('product/{id}', [ItemController::class, 'showProduct'])->name('product');
 
@@ -23,6 +26,9 @@ Route::post('cart', [OrderController::class, 'addOrRemoveFromCart']);
 Route::get('cart', [OrderController::class, 'showCart'])->name('cart');
 
 Route::post('cart/qty', [OrderController::class, 'changeQuantity']);
+
+Route::get('order/create', [OrderController::class, 'showOrder'])->middleware(['auth']);
+Route::post('order/create', [OrderController::class, 'addOrder'])->middleware(['auth']);
 
 Route::get('profile', [UserController::class, 'showProfile'])->name('profile')->middleware(['auth']);
 

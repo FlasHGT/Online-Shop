@@ -33,7 +33,9 @@ if (!function_exists('sortItems'))
                 break;
             case 'htol':
                 $items = $items->orderByDesc('cena');
-                break;      
+                break;
+            default:
+                $items = $items->orderBy('nosaukums');
         } 
     }
 }

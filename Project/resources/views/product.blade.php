@@ -8,22 +8,22 @@
                             <img class="prod-pic" src="{{ asset('img/test.png') }}" alt="alt"/>
                             <x-button class="prod-btn" item-id="{{ $item->id }}" type="button">
                                 @if ($item->inCart == 0)
-                                    Add To Cart
+                                    {{ __("messages.Add To Cart") }}
                                 @else
-                                    Remove From Cart
+                                    {{ __("messages.Remove From Cart") }}
                                 @endif
                             </x-button>
                         </div>
                         <div class="prod-content">
                             <h1>{{ $item->nosaukums }}</h1>
-                            <p class="prod-desc">{{ $item->apraksts }}</p>
+                            <p class="prod-desc">{{ __("messages." . $item->apraksts) }}</p>
                             
                             @if ($item->atlaides_procenti)
-                                <p class="prod-price"><del>{{ number_format($item->sakuma_cena, 2) }} €</del></p>
-                                <p class="prod-price"><span style="color:red;">{{ number_format($item->cena, 2) }} €</span></p>
+                                <p class="prod-price"><del>{{ number_format($item->sakuma_cena, 2, ".", "") }} €</del></p>
+                                <p class="prod-price"><span style="color:red;">{{ number_format($item->cena, 2, ".", "") }} €</span></p>
                             @else
                                 <br>
-                                <p class="prod-price">{{ number_format($item->cena, 2) }} €</p>
+                                <p class="prod-price">{{ number_format($item->cena, 2, ".", "") }} €</p>
                             @endif
                         </div>
                         
@@ -43,11 +43,11 @@
                     url: url,
                     data: { id: $(e.target).attr('item-id'), _token: CSRF_TOKEN },
                     success: function (data) {
-                        if ($(e.target).text().trim() === "Add To Cart") {
-                            $(e.target).text("Remove From Cart");   
+                        if ($(e.target).text().trim() === "{{ __('messages.Add To Cart') }}") {
+                            $(e.target).text("{{ __('messages.Remove From Cart') }}");   
                         }
                         else {
-                            $(e.target).text("Add To Cart");   
+                            $(e.target).text("{{ __('messages.Add To Cart') }}");   
                         }
                     },
                     error: function (data) {

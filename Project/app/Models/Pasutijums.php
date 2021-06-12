@@ -15,6 +15,8 @@ class Pasutijums extends Model
     use HasFactory;
     
     protected $table = 'pasutijumi';
+          
+    protected $fillable = ['klients_id', 'adrese_id', 'klientakarte_id', 'izpildes_datums', 'cena'];
     
     public function user()
     {

@@ -25,7 +25,18 @@
             </div>
             
             <!-- Settings Dropdown -->
-            <div class="hidden sm:flex sm:items-center">                             
+            <div class="hidden sm:flex sm:items-center">       
+                <div class="dropdown mr-5">
+                    <button class="nav_btn flex items-center">
+                        <i class="fas fa-language"></i>
+                    </button>
+
+                    <div class="dropdown-content">
+                        <x-dropdown-link href="{{ url('lang/en') }}">EN</x-dropdown-link>
+                        <x-dropdown-link href="{{ url('lang/lv') }}">LV</x-dropdown-link>
+                    </div>
+                </div>
+                
                 <div class="mr-5">
                     <form method="GET" action="{{ route('cart') }}">
                     @csrf
@@ -34,7 +45,7 @@
                         </button>
                     </form>
                 </div>
-
+                
                 <div class="dropdown mr-5">
                     <button class="nav_btn flex items-center">
                         <i class="fas fa-user"></i>
@@ -42,8 +53,8 @@
 
                     <div class="dropdown-content">
                         @auth
-                            <x-dropdown-link href="{{ route('profile') }}">Profile</x-dropdown-link>
-                            <x-dropdown-link href="{{ route('orders') }}">Orders</x-dropdown-link>
+                            <x-dropdown-link href="{{ route('profile') }}">{{ __('messages.Profile') }}</x-dropdown-link>
+                            <x-dropdown-link href="{{ route('orders') }}">{{ __('messages.Orders') }}</x-dropdown-link>
                             
                             <div>                             
                                 <form method="POST" action="{{ route('logout') }}">
@@ -52,15 +63,15 @@
                                     <x-dropdown-link :href="route('logout')"
                                         onclick="event.preventDefault();
                                                     this.closest('form').submit();">
-                                        {{ __('Logout') }}
+                                        {{ __('messages.Logout') }}
                                     </x-dropdown-link>
                                 </form>
                             </div>
                         @endauth
 
                         @guest
-                            <x-dropdown-link href="{{ route('login') }}">Log in</x-dropdown-link>                           
-                            <x-dropdown-link href="{{ route('register') }}">Register</x-dropdown-link>
+                            <x-dropdown-link href="{{ route('login') }}">{{ __('messages.Log in') }}</x-dropdown-link>                           
+                            <x-dropdown-link href="{{ route('register') }}">{{ __('messages.Register') }}</x-dropdown-link>
                         @endguest
                     </div>
                 </div> 
@@ -81,28 +92,41 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <!-- Responsive Settings Options -->
-        @auth
-            <x-dropdown-link href="{{ route('cart') }}">Cart</x-dropdown-link>
-            <x-dropdown-link href="{{ route('profile') }}">Profile</x-dropdown-link>
-            <x-dropdown-link href="{{ route('orders') }}">Orders</x-dropdown-link>
-            
-            <div>                             
-                <form method="POST" action="{{ route('logout') }}">
-                @csrf
+        <div class="responsive-nav">
+            @auth
+                <x-dropdown-link href="{{ route('cart') }}">{{ __('messages.Cart') }}</x-dropdown-link>
+                <x-dropdown-link href="{{ route('profile') }}">{{ __('messages.Profile') }}</x-dropdown-link>
+                <x-dropdown-link href="{{ route('orders') }}">{{ __('messages.Orders') }}</x-dropdown-link>
 
-                    <x-dropdown-link :href="route('logout')"
-                        onclick="event.preventDefault();
-                                    this.closest('form').submit();">
-                        {{ __('Logout') }}
-                    </x-dropdown-link>
-                </form>
-            </div>
-        @endauth
+                <div>                             
+                    <form method="POST" action="{{ route('logout') }}">
+                    @csrf
 
-        @guest
-            <x-dropdown-link href="{{ route('cart') }}">Cart</x-dropdown-link>
-            <x-dropdown-link href="{{ route('login') }}">Log in</x-dropdown-link>
-            <x-dropdown-link href="{{ route('register') }}">Register</x-dropdown-link>
-        @endguest
+                        <x-dropdown-link :href="route('logout')"
+                            onclick="event.preventDefault();
+                                        this.closest('form').submit();">
+                            {{ __('messages.Logout') }}
+                        </x-dropdown-link>
+                    </form>
+                </div>
+                
+                <div class="responsive-nav-lan">
+                    <x-dropdown-link href="{{ url('lang/en') }}">EN</x-dropdown-link>
+                    <x-dropdown-link href="{{ url('lang/lv') }}">LV</x-dropdown-link>
+                </div>
+            @endauth
+
+            @guest
+
+                <x-dropdown-link href="{{ route('cart') }}">{{ __('messages.Cart') }}</x-dropdown-link>
+                <x-dropdown-link href="{{ route('login') }}">{{ __('messages.Log in') }}</x-dropdown-link>
+                <x-dropdown-link href="{{ route('register') }}">{{ __('messages.Register') }}</x-dropdown-link>
+                
+                <div class="responsive-nav-lan">
+                    <x-dropdown-link href="{{ url('lang/en') }}">EN</x-dropdown-link>
+                    <x-dropdown-link href="{{ url('lang/lv') }}">LV</x-dropdown-link>
+                </div>
+            @endguest
+        </div>
     </div>
 </nav>

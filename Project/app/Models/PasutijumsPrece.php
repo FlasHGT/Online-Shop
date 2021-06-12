@@ -14,6 +14,8 @@ class PasutijumsPrece extends Model
     
     protected $table = 'pasutijumipreces';
     
+    protected $fillable = ['prece_id', 'pasutijums_id', 'skaits'];
+    
     public function prece()
     {
         return $this->belongsTo(Prece::class);

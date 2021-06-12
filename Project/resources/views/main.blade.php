@@ -2,23 +2,23 @@
     <div class="py-12 main-container">
         <div class="main-filters max-w-7xl sm:px-6 lg:px-8 bg-white shadow-sm sm:rounded-lg">            
             <div class="main-filters-items">
-                <h1>Categories</h1>
+                <h1>{{ __('messages.Categories') }}</h1>
             
                 <div class="main-filter-container">
                     @if(!isset($selectedCategory))
-                        <a class="category-name category-name-selected" href="{{ route('main') }}"><p>Visas preces</p></a>
+                        <a class="category-name category-name-selected" href="{{ route('main') }}">{{ __('messages.All Items') }}</a>
                     @else 
-                        <a class="category-name" href="{{ route('main') }}"><p>Visas preces</p></a>
+                        <a class="category-name" href="{{ route('main') }}">{{ __('messages.All Items') }}</a>
                     @endif
 
                     @foreach ($categories as $category)
                         @isset ($selectedCategory)
                             @if ($selectedCategory == $category->id)
-                                <a class="category-name category-name-selected" href="{{ route('main', ['category' => $category->id]) }}"><p>{{ $category->nosaukums }}</p></a>
+                                <a class="category-name category-name-selected" href="{{ route('main', ['category' => $category->id]) }}">{{ __('messages.' . $category->nosaukums) }}</a>
                                 @continue
                             @endif
                         @endisset
-                            <a class="category-name" href="{{ route('main', ['category' => $category->id]) }}"><p>{{ $category->nosaukums }}</p></a>
+                            <a class="category-name" href="{{ route('main', ['category' => $category->id]) }}">{{ __('messages.' . $category->nosaukums) }}</a>
                     @endforeach
                 </div>
 
@@ -26,13 +26,13 @@
 
                 <div class="main-filter-container">
                     <div class="dropdown">
-                        <p class="filter-name">Sort by</p>
+                        <p class="filter-name">{{ __('messages.Sort by') }}</p>
                         
                         <div class="dropdown-content">
-                            <x-dropdown-link class="current-filter-link" href="{{ route('main', ['category' => request()->category, 'search' => request()->search, 'sort' => 'atoz']) }}">Names from A to Z</x-dropdown-link>
-                            <x-dropdown-link class="current-filter-link" href="{{ route('main', ['category' => request()->category, 'search' => request()->search, 'sort' => 'ztoa']) }}">Names from Z to A</x-dropdown-link>
-                            <x-dropdown-link class="current-filter-link" href="{{ route('main', ['category' => request()->category, 'search' => request()->search, 'sort' => 'ltoh']) }}">Lowest to highest price</x-dropdown-link>
-                            <x-dropdown-link class="current-filter-link" href="{{ route('main', ['category' => request()->category, 'search' => request()->search, 'sort' => 'htol']) }}">Highest to lowest price</x-dropdown-link>
+                            <x-dropdown-link class="current-filter-link" href="{{ route('main', ['category' => request()->category, 'search' => request()->search, 'sort' => 'atoz']) }}">{{ __('messages.Names from A to Z') }}</x-dropdown-link>
+                            <x-dropdown-link class="current-filter-link" href="{{ route('main', ['category' => request()->category, 'search' => request()->search, 'sort' => 'ztoa']) }}">{{ __('messages.Names from Z to A') }}</x-dropdown-link>
+                            <x-dropdown-link class="current-filter-link" href="{{ route('main', ['category' => request()->category, 'search' => request()->search, 'sort' => 'ltoh']) }}">{{ __('messages.Lowest to highest price') }}</x-dropdown-link>
+                            <x-dropdown-link class="current-filter-link" href="{{ route('main', ['category' => request()->category, 'search' => request()->search, 'sort' => 'htol']) }}">{{ __('messages.Highest to lowest price') }}</x-dropdown-link>
                         </div>
                     </div> 
                 </div>
@@ -55,18 +55,18 @@
                                         <h1>{{ $item->nosaukums }}</h1>
                                     </a>
                                     @if ($item->atlaides_procenti)
-                                        <p class="main-price"><del>{{ number_format($item->sakuma_cena, 2) }} €</del></p>
-                                        <p class="main-price"><span style="color:red;">{{ number_format($item->cena, 2) }} €</span></p>
+                                        <p class="main-price"><del>{{ number_format($item->sakuma_cena, 2, ".", "") }} €</del></p>
+                                        <p class="main-price"><span style="color:red;">{{ number_format($item->cena, 2, ".", "") }} €</span></p>
                                     @else
                                         <br>
-                                        <p class="main-price">{{ number_format($item->cena, 2) }} €</p>
+                                        <p class="main-price">{{ number_format($item->cena, 2, ".", "") }} €</p>
                                     @endif
 
                                     <x-button class="main-btn" item-id="{{ $item->id }}" type="button">
                                         @if ($item->inCart == 0)
-                                            Add To Cart
+                                            {{ __('messages.Add To Cart') }}
                                         @else
-                                            Remove From Cart
+                                            {{ __('messages.Remove From Cart') }}
                                         @endif
                                     </x-button>
                                 </div> 
@@ -77,7 +77,7 @@
                             {{ $items->withQueryString()->links() }}
                         </span>
                     @else
-                        <p style="font-weight: bold;">No items found with the current search term!</p>
+                        <p style="font-weight: bold;">{{ __('messages.No items found with the current search term!') }}</p>
                     @endif
                 </div>
             </div>
@@ -94,11 +94,11 @@
                     url: url,
                     data: { id: $(e.target).attr('item-id'), _token: CSRF_TOKEN },
                     success: function (data) {
-                        if ($(e.target).text().trim() === "Add To Cart") {
-                            $(e.target).text("Remove From Cart");   
+                        if ($(e.target).text().trim() === "{{ __('messages.Add To Cart') }}") {
+                            $(e.target).text("{{ __('messages.Remove From Cart') }}");   
                         }
                         else {
-                            $(e.target).text("Add To Cart");   
+                            $(e.target).text("{{ __('messages.Add To Cart') }}");   
                         }
                     },
                     error: function (data) {
