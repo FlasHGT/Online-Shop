@@ -97,4 +97,6 @@ return [
     'Does a bunch of things related to networks' => 'Does a bunch of things related to networks',
     'Seat' => 'Seat',
     'Key illumination: Yes' => 'Key illumination: Yes',
+    "You haven't added your name" => "You haven't added your name",
+    "You haven't added your surname" => "You haven't added your surname",
 ];

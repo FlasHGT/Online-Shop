@@ -224,8 +224,8 @@ class UserController extends Controller
         $rules = array(
             'email' => 'nullable|email|unique:users,email',
             'password' => ['nullable', 'confirmed', Rules\Password::min(8)],
-            'name' => 'nullable|string',
-            'surname' => 'nullable|string',
+            'name' => 'nullable|string|required_with:surname',
+            'surname' => 'nullable|string|required_with:name',
             'birthday' => 'nullable|date',
             'mobile_phone' => 'nullable|numeric|min:20000000|max:29999999',
         );

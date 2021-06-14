@@ -5,6 +5,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\GoogleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +18,10 @@ use App\Http\Controllers\LanguageController;
 |
 */
 
-Route::get('lang/{locale}',LanguageController::class);
+Route::get('auth/google', [GoogleController::class, 'redirectToGoogle']);
+Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
+
+Route::get('lang/{locale}', LanguageController::class);
 
 Route::get('/', [ItemController::class, 'showMain'])->name('main');
 Route::get('product/{id}', [ItemController::class, 'showProduct'])->name('product');

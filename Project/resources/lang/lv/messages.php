@@ -97,4 +97,6 @@ return [
     'Does a bunch of things related to networks' => 'Veic dažādas darbības, kas ir saistītas ar tīkliem',
     'Seat' => 'Sēdvieta',
     'Key illumination: Yes' => 'Taustiņu apgaismojums: Jā',
+    "You haven't added your name" => "Jūs neesat pievienojuši savu vārdu",
+    "You haven't added your surname" => "Jūs neesat pievienojuši savu uzvārdu",
 ];

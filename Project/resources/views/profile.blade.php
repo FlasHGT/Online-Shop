@@ -8,9 +8,19 @@
                         <div class='profile-item'>
                             <p><span>{{ __("messages.Email") }}:</span> {{ $user->email }}</p>
                             <p><span>{{ __("messages.Password") }}:</span> *****</p>
-                            <p><span>{{ __("messages.Name") }}:</span> {{ $user->vards }}</p>
-                            <p><span>{{ __("messages.Surname") }}:</span> {{ $user->uzvards }}</p>
 
+                            @if (!$user->vards)
+                                <p><span>{{ __("messages.Name") }}:</span> {{ __("messages.You haven't added your name") }}</p>
+                            @else
+                                <p><span>{{ __("messages.Name") }}:</span> {{ $user->vards }}</p>
+                            @endif
+                            
+                            @if (!$user->uzvards)
+                                <p><span>{{ __("messages.Surname") }}:</span> {{ __("messages.You haven't added your surname") }}</p>
+                            @else
+                                <p><span>{{ __("messages.Surname") }}:</span> {{ $user->uzvards }}</p>
+                            @endif
+                            
                             @if (!$user->dzimsanas_diena)
                                 <p><span>{{ __("messages.Birthday") }}:</span> {{ __("messages.You haven't added your birthday") }}</p>
                             @else
