@@ -1,7 +1,8 @@
 # Online-Shop
 This is a typical E-commerce store like Amazon, eBay e.t.c. This was my first full-stack project, that I created for one of my University assignments, I mainly focused on the
 back-end, because that was something completely new to me.
-#Features
+
+# Features
   <ul>
     <li>Users can register/log in</li>
     <li>Users can place items in a cart, then view them</li>
@@ -12,6 +13,7 @@ back-end, because that was something completely new to me.
     <li>Users can view their order history</li>
     <li>And more...</li>
   </ul>
+  
 # What I Learned
   <ul>
     <li>MVC architectural pattern</li>
