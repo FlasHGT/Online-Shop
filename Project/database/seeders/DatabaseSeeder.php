@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Schema;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -21,13 +22,13 @@ class DatabaseSeeder extends Seeder
 //        $this->call(AuthorSeeder::class);
 //        $this->call(BookSeeder::class);        
         
+        // create an admin user with email admin@library.test and password secret
         User::truncate();
-        User::create(array('email' => 'admin@shop.test', 
-                           'password' => bcrypt('secret'),
-                           'vards' => 'George',
-                           'uzvards' => 'Toliashvili',
-                           'dzimsanas_diena' => Carbon::parse('2001-02-25'),
-                           'telefona_nr' => 22222222));
+        User::create(array('vards' => 'Georgs',
+                           'uzvards' => 'Toliašvili',
+                           'email' => 'admin@shop.test', 
+                           'password' => Hash::make('secret'),
+                           'role' => 1));
         
         Schema::enableForeignKeyConstraints();
     }

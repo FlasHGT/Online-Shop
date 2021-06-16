@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\GoogleController;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,5 +56,8 @@ Route::post('profile/card/update', [UserController::class, 'updateCard'])->middl
 
 Route::get('orders', [UserController::class, 'showOrders'])->name('orders')->middleware(['auth']);
 Route::get('order/{id}', [UserController::class, 'showOrderItems'])->middleware(['auth']);
+
+Route::get('admin', [AdminController::class, 'showAdminPanel'])->name('admin.show');
+Route::get('admin/orders', [AdminController::class, 'showOrders'])->name('admin.orders');
 
 require __DIR__.'/auth.php';

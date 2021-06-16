@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('uzvards')->nullable();
             $table->date('dzimsanas_diena')->nullable();
             $table->decimal('telefona_nr', 8, 0)->nullable();
+            $table->integer('role');
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();

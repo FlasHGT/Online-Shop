@@ -99,4 +99,6 @@ return [
     'Key illumination: Yes' => 'Key illumination: Yes',
     "You haven't added your name" => "You haven't added your name",
     "You haven't added your surname" => "You haven't added your surname",
+    'There are no orders!' => 'There are no orders!',
+    'Clients e-mail' => 'Clients e-mail',
 ];

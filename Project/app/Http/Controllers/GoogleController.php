@@ -39,6 +39,7 @@ class GoogleController extends Controller
                     'email' => $user->email,
                     'google_id'=> $user->id,
                     'password' => Hash::make(Str::random(12)),
+                    'role' => 0,
                 ]);
       
                 Auth::login($newUser);
@@ -50,5 +51,4 @@ class GoogleController extends Controller
             dd($e->getMessage());
         }
     }
-
 }

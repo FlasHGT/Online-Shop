@@ -85,7 +85,7 @@ class UserController extends Controller
     {        
         $order = Pasutijums::find($id);
         
-        if (Auth::id() != $order->klients_id)
+        if (Auth::id() != $order->klients_id && Auth::user()->role != 1)
         {
             return redirect()->route('main');
         }    
@@ -102,7 +102,6 @@ class UserController extends Controller
             
             $items = Arr::add($items, $x, $item);
         }
-        
         
         return view('order', compact('order', 'address', 'card', 'items', 'item_ids'));
     }

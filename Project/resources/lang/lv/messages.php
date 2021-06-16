@@ -99,4 +99,6 @@ return [
     'Key illumination: Yes' => 'Taustiņu apgaismojums: Jā',
     "You haven't added your name" => "Jūs neesat pievienojuši savu vārdu",
     "You haven't added your surname" => "Jūs neesat pievienojuši savu uzvārdu",
+    'There are no orders!' => 'Nav veikts neviens pasūtījums',
+    'Clients e-mail' => 'Klienta e-pasts',
 ];
