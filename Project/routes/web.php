@@ -55,6 +55,7 @@ Route::get('profile/card/update', [UserController::class, 'showCardUpdate'])->mi
 Route::post('profile/card/update', [UserController::class, 'updateCard'])->middleware(['auth']);
 
 Route::get('orders', [UserController::class, 'showOrders'])->name('orders')->middleware(['auth']);
+Route::get('order/{id}/invoice', [UserController::class, 'createInvoice'])->middleware(['auth']);
 Route::get('order/{id}', [UserController::class, 'showOrderItems'])->middleware(['auth']);
 
 Route::get('admin', [AdminController::class, 'showAdminPanel'])->name('admin.show');

@@ -101,4 +101,6 @@ return [
     "You haven't added your surname" => "You haven't added your surname",
     'There are no orders!' => 'There are no orders!',
     'Clients e-mail' => 'Clients e-mail',
+    'Invoice' => 'Invoice',
+    'Download' => 'Download',
 ];

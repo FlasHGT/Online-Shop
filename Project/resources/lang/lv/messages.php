@@ -101,4 +101,6 @@ return [
     "You haven't added your surname" => "Jūs neesat pievienojuši savu uzvārdu",
     'There are no orders!' => 'Nav veikts neviens pasūtījums',
     'Clients e-mail' => 'Klienta e-pasts',
+    'Invoice' => 'Rēķins',
+    'Download' => 'Lejupielādēt',
 ];

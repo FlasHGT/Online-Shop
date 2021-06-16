@@ -6,9 +6,13 @@
             <file>file:/C:/wamp64/www/georgs/app/Http/Controllers/AdminController.php</file>
             <file>file:/C:/wamp64/www/georgs/public/css/main.css</file>
             <file>file:/C:/wamp64/www/georgs/app/Http/Controllers/UserController.php</file>
+            <file>file:/C:/wamp64/www/georgs/app/Http/Controllers/LanguageController.php</file>
+            <file>file:/C:/wamp64/www/georgs/config/app.php</file>
             <file>file:/C:/wamp64/www/georgs/routes/web.php</file>
             <file>file:/C:/wamp64/www/georgs/resources/views/profile.blade.php</file>
             <file>file:/C:/wamp64/www/georgs/app/Http/Controllers/GoogleController.php</file>
+            <file>file:/C:/wamp64/www/georgs/bootstrap/app.php</file>
+            <file>file:/C:/wamp64/www/georgs/app/Http/Middleware/LanguageMiddleware.php</file>
         </group>
     </open-files>
 </project-private>

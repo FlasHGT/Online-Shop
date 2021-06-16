@@ -19,6 +19,7 @@
                                 <th>{{ __('messages.Order Date') }}</th>
                                 <th>{{ __('messages.Total Price') }}</th>
                                 <th>{{ __('messages.Items') }}</th>
+                                <th>{{ __('messages.Invoice') }}</th>
                             </thead>
                             <tbody>
                                 @for ($x = 0; $x < count($orders); $x++) 
@@ -40,6 +41,7 @@
                                         <td data-label="Order Date">{{ $orders[$x]->izpildes_datums }}</td>
                                         <td data-label="Total Price">{{ number_format($orders[$x]->cena, 2, ".", "") }} €</td>
                                         <td data-label="Items"><a href="{{ url('order/' . $orders[$x]->id) }}"><x-button type="button">{{ __('messages.View') }}</x-button></a></td>
+                                        <td data-label="Invoice"><a href="{{ url('order/' . $orders[$x]->id . '/invoice') }}"><x-button type="button">{{ __('messages.Download') }}</x-button></a></td>
                                     </tr>   
                                 @endfor
                             </tbody>

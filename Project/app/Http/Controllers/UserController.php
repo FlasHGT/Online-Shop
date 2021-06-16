@@ -13,6 +13,7 @@ use App\Models\KlientsKarte;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\Support\Arr;
+use PDF;
 
 class UserController extends Controller
 {
@@ -79,6 +80,24 @@ class UserController extends Controller
         }
         
         return view('orders', compact('orders', 'addresses', 'cards'));
+    }
+    
+    public function createInvoice ($id)
+    {
+        $order = Pasutijums::find($id);
+        
+        $item_ids = PasutijumsPrece::where('pasutijums_id', $order->id)->get();
+        $items = array();
+
+        for ($x = 0; $x < count($item_ids); $x++) 
+        {
+            $item = Prece::find($item_ids[$x]->prece_id)->toArray();
+            
+            $items = Arr::add($items, $x, $item);
+        }
+        
+        $pdf = PDF::loadView('invoice', compact('order', 'items', 'item_ids'));
+        return $pdf->download('invoice.pdf');
     }
     
     public function showOrderItems ($id)
