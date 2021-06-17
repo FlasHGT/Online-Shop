@@ -103,4 +103,9 @@ return [
     'Clients e-mail' => 'Klienta e-pasts',
     'Invoice' => 'Rēķins',
     'Download' => 'Lejupielādēt',
+    'Add New Item' => 'Pievienot jaunu preci',
+    'Create' => 'Izveidot',
+    'Description' => 'Apraksts',
+    'Base Price' => 'Sākuma cena',
+    'Discount %' => 'Atlaide %',
 ];

@@ -8,6 +8,17 @@ del{
     margin-right: 10px;
 }
 
+.admin-categories {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+}
+
+.admin-categories div {
+    display: flex;
+    flex-direction: row;
+}
+
 .responsive-nav {
     display: flex;
     flex-direction: column;

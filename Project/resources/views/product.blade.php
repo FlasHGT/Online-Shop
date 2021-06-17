@@ -16,7 +16,7 @@
                         </div>
                         <div class="prod-content">
                             <h1>{{ $item->nosaukums }}</h1>
-                            <p class="prod-desc">{{ __("messages." . $item->apraksts) }}</p>
+                            <p class="prod-desc">{{ $item->apraksts }}</p>
                             
                             @if ($item->atlaides_procenti)
                                 <p class="prod-price"><del>{{ number_format($item->sakuma_cena, 2, ".", "") }} €</del></p>

@@ -103,4 +103,9 @@ return [
     'Clients e-mail' => 'Clients e-mail',
     'Invoice' => 'Invoice',
     'Download' => 'Download',
+    'Add New Item' => 'Add New Item',
+    'Create' => 'Create',
+    'Description' => 'Description',
+    'Base Price' => 'Base Price',
+    'Discount %' => 'Discount %',
 ];

@@ -1,5 +1,7 @@
 <x-guest-layout>
-    <x-jet-authentication-card>
+    
+    
+    <x-jet-authentication-card>  
         <x-slot name="logo">
             <x-jet-authentication-card-logo />
         </x-slot>
@@ -38,6 +40,12 @@
                         {{ __('messages.Forgot your password?') }}
                     </a>
                 @endif
+                
+                <x-jet-button class="ml-4">
+                    <a href="{{ url('register') }}">
+                        {{ __('messages.Register') }}
+                    </a>
+                </x-jet-button>
 
                 <x-jet-button class="ml-4">
                     {{ __('messages.Log in') }}
@@ -50,5 +58,6 @@
                 </a>
             </div>
         </form>
+       
     </x-jet-authentication-card>
 </x-guest-layout>

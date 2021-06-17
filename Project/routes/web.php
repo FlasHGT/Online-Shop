@@ -60,5 +60,7 @@ Route::get('order/{id}', [UserController::class, 'showOrderItems'])->middleware(
 
 Route::get('admin', [AdminController::class, 'showAdminPanel'])->name('admin.show');
 Route::get('admin/orders', [AdminController::class, 'showOrders'])->name('admin.orders');
+Route::get('admin/item/new', [AdminController::class, 'showNewItem'])->name('admin.showNewItem');
+Route::post('admin/item/new', [AdminController::class, 'addItem'])->name('admin.newItem');
 
 require __DIR__.'/auth.php';

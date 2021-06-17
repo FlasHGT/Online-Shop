@@ -12,6 +12,8 @@ class Prece extends Model
 {
     use HasFactory;
     
+    protected $fillable = ['kategorija_id', 'nosaukums', 'apraksts', 'cena', 'sakuma_cena', 'atlaides_procenti'];
+    
     public function kategorija()
     {
         return $this->belongsTo(Kategorija::class);

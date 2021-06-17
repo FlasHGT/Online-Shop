@@ -6,19 +6,19 @@
                     @csrf 
                     <input type="hidden" name="card_id" value="{{ $card->id }}"/>
                     <div>
-                        <x-label value="{{ __("messages.Number") }}" for="number"></x-label>
+                        <x-label value="{{ __('messages.Number') }}" for="number"></x-label>
                         <x-input type="number" name="number" id="number" class="block mt-1 w-full" placeholder="{{ $card->numurs }}" value="{{ old('number') }}"></x-input>
                         <x-validation-error class="mb-4" :errors="$errors" title="number"/>  
                     </div>
 
                     <div>
-                        <x-label value="{{ __("messages.CVC") }}" for="cvc"></x-label>
+                        <x-label value="{{ __('messages.CVC') }}" for="cvc"></x-label>
                         <x-input type="number" name="cvc" id="cvc" class="block mt-1 w-full" placeholder="{{ $card->CVC }}" value="{{ old('cvc')}}"></x-input>
                         <x-validation-error class="mb-4" :errors="$errors" title="cvc"/>  
                     </div>
 
                     <div>
-                        <x-label value="{{ __("messages.Expiration Date") }}" for="expiry_date"></x-label>
+                        <x-label value="{{ __('messages.Expiration Date') }}" for="expiry_date"></x-label>
                         <x-input type="date" name="expiry_date" id="expiry_date" class="block mt-1 w-full" value="{{ $card->termins_lidz }}"></x-input>
                         <x-validation-error class="mb-4" :errors="$errors" title="expiry_date"/>  
                     </div>

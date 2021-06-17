@@ -2,6 +2,7 @@
     <div class="py-12 main-container">
         <div class="main-filters max-w-7xl sm:px-6 lg:px-8 bg-white shadow-sm sm:rounded-lg">            
             <div class="main-filters-items">
+                <a class="category-name" href="{{ route('admin.showNewItem') }}"><h1>{{ __('messages.Add New Item') }}</h1></a>
                 <a class="category-name" href="{{ route('admin.orders') }}"><h1>{{ __('messages.Orders') }}</h1></a>
             </div>
         </div>
@@ -46,6 +47,52 @@
                                 @endfor
                             </tbody>
                         </table>
+                    @endif
+                    
+                    @if (isset($newItem))
+                        <form method="POST" action="{{action([App\Http\Controllers\AdminController::class, 'addItem'])}}">
+                            @csrf 
+                            
+                            <x-label value="{{ __('messages.Categories') }}"></x-label>
+                            <div class="admin-categories">
+                                @foreach ($categories as $category) 
+                                    <div>
+                                        <x-input type="radio" id="{{ $category->id }}" name="category" value="{{ $category->id }}"></x-input>
+                                        <x-label for="{{ $category->id }}">{{ __('messages.' . $category->nosaukums) }}</x-label>
+                                    </div>
+                                @endforeach
+                                <x-validation-error class="mb-4" :errors="$errors" title="category"/> 
+                            </div>
+                            
+                            <div>
+                                <x-label value="{{ __('messages.Item Name') }}" for="name"></x-label>
+                                <x-input type="text" name="name" id="name" class="block mt-1 w-full" value="{{ old('name') }}"></x-input> 
+                                <x-validation-error class="mb-4" :errors="$errors" title="name"/> 
+                            </div>
+
+                            <div>
+                                <x-label value="{{ __('messages.Description') }}" for="description"></x-label>
+                                <textarea type="text" name="description" id="description" class="block mt-1 w-full" value="{{ old('description') }}"></textarea>
+                                <x-validation-error class="mb-4" :errors="$errors" title="description"/> 
+                            </div>
+
+                            <div>
+                                <x-label value="{{ __('messages.Base Price') }}" for="base_price"></x-label>
+                                <x-input type="number" name="base_price" id="base_price" class="block mt-1 w-full" value="{{ old('base_price') }}"></x-input>
+                                <x-validation-error class="mb-4" :errors="$errors" title="base_price"/> 
+                            </div>
+
+                            <div>
+                                <x-label value="{{ __('messages.Discount %') }}" for="discount_percent"></x-label>
+                                <x-input type="number" min="1" max="100" name="discount_percent" id="discount_percent" class="block mt-1 w-full" value="{{ old('discount_percent') }}"></x-input>
+                            </div>                                         
+
+                            <div class="flex items-center justify-end mt-4">
+                                <x-button class="ml-4">
+                                    {{ __("messages.Create") }}
+                                </x-button>
+                            </div>
+                        </form>  
                     @endif
                 </div>
             </div>
